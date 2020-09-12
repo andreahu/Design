@@ -26,13 +26,29 @@ public class Ledger {
     }
 
     public int getAccountBalance(String address){
-        
+        //@TODO: Return the account balance for the Account with a given address
+        //AH: how to return an object by its attributes??
+
+        return theAccount.address;
+
+    }
+
+    public int getAccountBalances(){
+
+        //@TODO: Return the account balance map for the most recent completed block.
+        //AH: how to know which block is the most recent completed?
+
+    }
+
+    public int getTransaction(String transactionId){
+        //@TODO: Return the Transaction for the given transaction id.
     }
 
 
 
 
     public void validate(){
+
 
 
     }
