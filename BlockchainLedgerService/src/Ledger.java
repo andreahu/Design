@@ -57,9 +57,19 @@ public class Ledger {
 
     }
 
-    public int getTransaction(String transactionId){
-        //@TODO: Return the Transaction for the given transaction id.
+    public Transaction getTransaction(String transactionId){
+        //Return the Transaction for the given transaction id.
 
+        Iterator<Map.Entry<Integer, Block>> iterator = blockMap.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Integer, Block> entry = iterator.next();
+            for (int i = 0; i < entry.getValue().transactionList.size(); i++) {
+                if(entry.getValue().transactionList.get(i).transactionId == transactionId){
+                    return entry.getValue().transactionList.get(i);
+                }
+            }
+        }
+        return null;
     }
 
 
@@ -69,6 +79,7 @@ public class Ledger {
 
         //Validate the current state of the blockchain. For each block, check the
         //hash of the previous hash, make sure that the account balances total to the max value.
+
         //@TODO AH:
         //the design doc says "After a block is saved, the total value of all accounts in the account
         // balances map should equal the maximum possible account value of 2147483647"
