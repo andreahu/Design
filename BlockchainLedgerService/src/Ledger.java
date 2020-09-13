@@ -9,6 +9,9 @@ public class Ledger {
     Block genesisBlock;
     Map<Integer, Block> blockMap;
 
+    //AH added
+    Block currentBlock;
+
     public String createAccount(String accountId){
         Account newAccount = new Account(accountId);
         return newAccount.address;
@@ -17,14 +20,18 @@ public class Ledger {
     public String processTransaction(Transaction transaction){
 
         try{
-            // @TODO: 1
-            // Validate the Transaction
-
-            //@TODO: 2
-            // add the Transaction to the current Block
-            // and update the associated Account balances for the current Block
-
-            return transaction.transactionId;
+            if(transaction!= null){ //@TODO: can I use if else to catch exception?
+                // add the Transaction to the current Block
+                // and update the associated Account balances for the current Block
+                currentBlock.transactionList.add(transaction);
+                if(!currentBlock.accountBalanceMap.containsKey(transaction.receiver.address)){
+                    currentBlock.accountBalanceMap.put(transaction.receiver.address, transaction.receiver);
+                }
+                if(!currentBlock.accountBalanceMap.containsKey(transaction.payer.address)){
+                    currentBlock.accountBalanceMap.put(transaction.payer.address, transaction.payer);
+                }
+                return transaction.transactionId;
+            }
         } catch(LedgerException e){
             System.out.println("invalid transaction");
         }
