@@ -1,4 +1,5 @@
 public class CommandProcessor {
+    Ledger ledger;
 
     public void processCommand(String command){
 

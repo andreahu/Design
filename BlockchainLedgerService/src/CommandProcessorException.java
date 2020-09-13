@@ -1,4 +1,4 @@
-public class CommandProcessorException {
+public class CommandProcessorException extends Throwable {
 
     String command;
     String reason;

@@ -1,8 +1,13 @@
+import java.util.Map;
+
 public class Ledger {
 
     String name;
     String description;
     String seed;
+
+    Block genesisBlock;
+    Map<Integer, Block> blockMap;
 
     public String createAccount(String accountId){
         Account newAccount = new Account(accountId);

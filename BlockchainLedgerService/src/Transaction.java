@@ -4,5 +4,6 @@ public class Transaction {
     int amount;
     int fee;
     String note;
-
+    Account receiver;
+    Account payer;
 }
