@@ -66,8 +66,7 @@ public class CommandProcessor {
                     }
                     int blockId = Integer.parseInt(list.get(1));
                     Block block = ledger.getBlock(blockId);
-                    // TODO: Should print more details. Override toString of block.
-                    System.out.println("Block " + block.blockNumber + "has " + block.transactionList.size() + " transactions");
+                    System.out.println(block.toString());
                     break;
 
                 case "get-transaction":

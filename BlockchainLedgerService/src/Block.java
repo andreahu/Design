@@ -27,4 +27,15 @@ public class Block {
         // TODO: Implement the proper hash.
         return Integer.toString(this.hashCode());
     }
+
+    @Override
+    public String toString() {
+        return
+                "blockNumber=" + blockNumber +
+                "\n previousHash='" + previousHash + '\'' +
+                "\n hash='" + hash + '\'' +
+                "\n transactionList=" + transactionList +
+                "\n accountBalanceMap=" + accountBalanceMap +
+                '}';
+    }
 }

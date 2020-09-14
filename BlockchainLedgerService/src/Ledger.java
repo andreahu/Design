@@ -20,12 +20,7 @@ public class Ledger {
         this.seed = seed;
 
         this.blockMap = new HashMap<Integer, Block>();
-
-        // Initialize genesis block.
-        genesisBlock = new Block(1, null, new HashMap<String, Account>());
-        genesisBlock.hash = genesisBlock.computeHash();
-        this.blockMap.put(1, genesisBlock);
-
+        this.genesisBlock = null;
 
         // Initialize master account.
         Map<String, Account> accountMap = new HashMap<String, Account>();
@@ -34,7 +29,7 @@ public class Ledger {
         accountMap.put(master.address, master);
 
         // Initialize currentBlock.
-        this.currentBlock = new Block(this.getNextBlockNumber(), genesisBlock, accountMap);
+        this.currentBlock = new Block(this.getNextBlockNumber(), null, accountMap);
     }
 
     public String createAccount(String accountId){
@@ -66,11 +61,15 @@ public class Ledger {
                 Account newAccount = new Account(entry.getValue().address, entry.getValue().balance);
                 clonedMap.put(entry.getKey(), newAccount);
             }
+            Block toBeCommitted = new Block(this.currentBlock.blockNumber, this.currentBlock.previousBlock, this.currentBlock.accountBalanceMap);
+            toBeCommitted.transactionList = currentBlock.transactionList;
+            toBeCommitted.hash = this.currentBlock.computeHash();
+            if (toBeCommitted.previousBlock == null) {
+                this.genesisBlock = toBeCommitted;
+            }
 
-            this.currentBlock.hash = this.currentBlock.computeHash();
-            this.blockMap.put(this.currentBlock.blockNumber, this.currentBlock);
-            Block prevBlock = this.currentBlock;
-            this.currentBlock = new Block(this.getNextBlockNumber(), prevBlock, clonedMap);
+            this.blockMap.put(toBeCommitted.blockNumber, toBeCommitted);
+            this.currentBlock = new Block(this.getNextBlockNumber(), toBeCommitted, clonedMap);
         }
 
         return transaction.transactionId;
@@ -78,7 +77,7 @@ public class Ledger {
 
     public int getAccountBalance(String address) throws LedgerException{
         // Return the account for the Account with a given address
-        if(currentBlock.previousBlock.accountBalanceMap.containsKey(address)){
+        if(currentBlock.previousBlock != null && currentBlock.previousBlock.accountBalanceMap.containsKey(address)){
             return currentBlock.previousBlock.accountBalanceMap.get(address).balance;
         }else{
             throw new LedgerException("getAccountBalance", "address doesn't exist");
@@ -87,6 +86,9 @@ public class Ledger {
 
     public Map<String, Integer> getAccountBalances(){
         Map<String, Integer> balances = new HashMap<>();
+        if (this.currentBlock.previousBlock == null) {
+            return balances;
+        }
         for (Map.Entry<String, Account> entry : this.currentBlock.previousBlock.accountBalanceMap.entrySet()) {
             balances.put(entry.getKey(), entry.getValue().balance);
         }
@@ -95,13 +97,11 @@ public class Ledger {
 
     public Transaction getTransaction(String transactionId){
         //Return the Transaction for the given transaction id.
-
-        Iterator<Map.Entry<Integer, Block>> iterator = blockMap.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<Integer, Block> entry = iterator.next();
-            for (int i = 0; i < entry.getValue().transactionList.size(); i++) {
-                if(entry.getValue().transactionList.get(i).transactionId == transactionId){
-                    return entry.getValue().transactionList.get(i);
+        for (Map.Entry<Integer, Block> entry: this.blockMap.entrySet()) {
+            Block b = entry.getValue();
+            for (Transaction t : b.transactionList) {
+                if (t.transactionId.equals(transactionId)) {
+                    return t;
                 }
             }
         }
