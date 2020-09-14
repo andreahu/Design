@@ -63,7 +63,7 @@ public class Ledger {
             }
             Block toBeCommitted = new Block(this.currentBlock.blockNumber, this.currentBlock.previousBlock, this.currentBlock.accountBalanceMap);
             toBeCommitted.transactionList = currentBlock.transactionList;
-            toBeCommitted.hash = this.currentBlock.computeHash();
+            toBeCommitted.hash = toBeCommitted.computeHash(this.seed);
             if (toBeCommitted.previousBlock == null) {
                 this.genesisBlock = toBeCommitted;
             }
@@ -112,35 +112,40 @@ public class Ledger {
         return this.blockMap.get(number);
     }
 
-
-
     public void validate() throws LedgerException {
-
-        //Validate the current state of the blockchain. For each block, check the hash of the previous hash
-        //TODO: what to check?
-//        currentBlock.previousHash
-
-
-
-        // make sure that the account balances total to the max value.
-        //@TODO AH:
-        //the design doc says "After a block is saved, the total value of all accounts in the account
-        // balances map should equal the maximum possible account value of 2147483647"
-        //However each block also only has 10 transactions. How to make sure the 10 transactions
-        // totals to that number
-
-
-
-        //Verify that each completed block has exactly 10 transactions.
-        Iterator<Map.Entry<Integer, Block>> iterator = blockMap.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<Integer, Block> entry = iterator.next();
-            if(!entry.getValue().equals(currentBlock)){
-                if(entry.getValue().transactionList.size() != 10){
-                    throw new LedgerException("validate", "Unknown");
-                }
+        Block toBeValidated = this.currentBlock.previousBlock;
+        String prevHash = this.currentBlock.previousHash;
+        while (toBeValidated != null) {
+            // Validates transaction size.
+            if (toBeValidated.transactionList.size() != 10) {
+                throw new LedgerException("validate", "Transaction count is not 10.");
             }
+
+            // Validates account balances.
+            int total = 0;
+            for (Map.Entry<String, Account> entry : toBeValidated.accountBalanceMap.entrySet()) {
+                total += entry.getValue().balance;
+            }
+            if (total != Integer.MAX_VALUE) {
+                throw new LedgerException("validate", "Account balance has wrong total value:" + Integer.toString(total));
+            }
+
+            // Validate hash.
+            String hash = toBeValidated.computeHash(seed);
+            if (!hash.equals(toBeValidated.hash)) {
+                throw new LedgerException("validate", "Wrong hash value");
+            }
+
+            // Validate previous hash.
+            if (!prevHash.equals(hash)) {
+                System.out.println(prevHash);
+                System.out.println((hash));
+                throw new LedgerException("validate", "Previous hash values don't match");
+            }
+            prevHash = toBeValidated.previousHash;
+            toBeValidated = toBeValidated.previousBlock;
         }
+
     }
 
     public Account getAccount(String address) {

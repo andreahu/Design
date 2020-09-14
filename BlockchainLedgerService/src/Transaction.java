@@ -17,5 +17,9 @@ public class Transaction {
         this.receiver = receiver;
     }
 
+    public String getSignature() {
+        return this.transactionId + this.amount + this.fee + this.payer.address + this.receiver.address;
+    }
+
 
 }

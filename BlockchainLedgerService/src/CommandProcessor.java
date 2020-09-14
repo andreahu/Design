@@ -79,6 +79,8 @@ public class CommandProcessor {
                     break;
 
                 case "validate":
+                    ledger.validate();
+                    System.out.print("The blockchain is valid.");
                     break;
             }
         } catch (LedgerException l) {

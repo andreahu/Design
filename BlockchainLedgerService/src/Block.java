@@ -1,5 +1,8 @@
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -23,9 +26,19 @@ public class Block {
         this.accountBalanceMap = accountMap;
     }
 
-    public String computeHash() {
-        // TODO: Implement the proper hash.
-        return Integer.toString(this.hashCode());
+    public String computeHash(String seed) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            digest.update(seed.getBytes(StandardCharsets.UTF_8));
+            for (Transaction t : this.transactionList) {
+                digest.update(t.getSignature().getBytes(StandardCharsets.UTF_8));
+            }
+            byte[] hash = digest.digest();
+            return Arrays.toString(hash);
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println(e);
+            return "";
+        }
     }
 
     @Override
