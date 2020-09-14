@@ -8,4 +8,9 @@ public class Account {
         this.balance = 0;
     }
 
+    public Account(String address, int balance) {
+        this.address = address;
+        this.balance = balance;
+    }
+
 }
