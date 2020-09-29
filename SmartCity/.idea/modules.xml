@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/com.cscie97.ledger.iml" filepath="$PROJECT_DIR$/com.cscie97.ledger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SmartCity.iml" filepath="$PROJECT_DIR$/SmartCity.iml" />
     </modules>
   </component>
 </project>
