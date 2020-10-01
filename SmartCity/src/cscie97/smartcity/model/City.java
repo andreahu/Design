@@ -4,9 +4,9 @@ import java.util.Map;
 
 public class City {
     //attributes
-    private int cityId;
-    private int cityName;
-    private int blockChainAccount;
+    private String cityId;
+    private String cityName;
+    private String blockChainAccount;
     private Location location;
     private float radius;
 
@@ -15,4 +15,13 @@ public class City {
     private Map<Integer, Person> personMap;
 
 
+    public City(String cityId, String cityName, String blockChainAccount, Location location, float radius) {
+        this.cityId = cityId;
+        this.cityName = cityName;
+        this.blockChainAccount = blockChainAccount;
+        this.location = location;
+        this.radius = radius;
+
+
+    }
 }
