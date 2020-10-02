@@ -32,6 +32,8 @@ public class ModelService {
                 + " Latitude: " + city.getLat() + " Longitude: " + city.getLongt() + " radius: " + city.getRadius());
     }
 
+    /*Below are Device methods */
+
     /**
      * create the street light object and add the device to the city it belongs to
      *
@@ -54,5 +56,13 @@ public class ModelService {
         Device streetLight = cityMap.get(cityId).getDeviceMap().get(deviceId);
         streetLight.setBrightness(brightness);
     }
+
+
+    /*Below are Person methods */
+
+    public Resident defineResident(String personId, String name, String biometricId, String phoneNumber, String role, float lat, float longt, String blockChainAccountId) {
+        Resident resident = new Resident(personId, name, biometricId, phoneNumber, role, lat, longt, blockChainAccountId);
+    }
+
 
 }
