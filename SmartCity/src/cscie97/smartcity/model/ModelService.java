@@ -5,6 +5,7 @@ import java.util.Map;
 public class ModelService {
 
     private Map<String, City> cityMap;
+    private Map<String, Person> completePersonMap;
 
     /**
      * @param cityId
@@ -32,16 +33,12 @@ public class ModelService {
                 + " Latitude: " + city.getLat() + " Longitude: " + city.getLongt() + " radius: " + city.getRadius());
     }
 
-    public Boolean withinCity(float cityLat, float cityLo, float radius, float la, float lo) {
+    public boolean withinCity(float cityLat, float cityLo, float radius, float la, float lo) {
         if (Math.pow((cityLat - la), 2) + Math.pow((cityLo - lo), 2) <= Math.pow(radius, 2)) {
             return true;
         } else {
             return false;
         }
-    }
-
-    public City findCity() {
-        
     }
 
     /*Below are Device methods */
@@ -73,17 +70,34 @@ public class ModelService {
     /*Below are Person methods */
     public Resident defineResident(String personId, String name, String biometricId, String phoneNumber, String role, float lat, float longt, String blockChainAccountId) {
         Resident resident = new Resident(personId, name, biometricId, phoneNumber, role, lat, longt, blockChainAccountId);
-        //@TODO calculate the resident's location and location a city for him
-
+        completePersonMap.put(personId, resident);
+        //@TODO calculate the resident's location and locate a city for him, then add to city's personMap
 
         return resident;
     }
 
-    public void updateResident(String personId, String name, String biometricId, String phoneNumber, String role, float lat, float longt, String blockChainAccountId) {
-        if (personId != null) {
+    public void updateResident(String personId, String name, String biometricId, String phoneNumber,
+                               String role, float lat, float longt, String blockChainAccountId) {
+        Resident resident = (Resident) completePersonMap.get(personId);
+        if (name != null) {
+            resident.setName(name);
+        }
+        if (biometricId != null) {
 
         }
+        if (phoneNumber != null) {
+            resident.setPhoneNumber(phoneNumber);
+        }
+        if (role != null) {
+            resident.setRole(role);
+        }
 
+        resident.setLat(lat);
+        resident.setLongt(longt);
+
+        if (blockChainAccountId != null) {
+            resident.setBlockChainAccountId(blockChainAccountId);
+        }
     }
 
 
