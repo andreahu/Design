@@ -10,6 +10,8 @@ public class ModelService {
     public static float FLOAT_EMPTY = Float.MAX_VALUE;
 
     /**
+     * create city object and save to the city map
+     *
      * @param cityId
      * @param cityName
      * @param blockChainAccount
@@ -35,7 +37,17 @@ public class ModelService {
                 + " Latitude: " + city.getLat() + " Longitude: " + city.getlon() + " radius: " + city.getRadius());
     }
 
-    public boolean withinCity(float cityLat, float cityLo, float radius, float la, float lo) {
+    /**
+     * calculate if the distance between a location and a city is inside the city's radius
+     *
+     * @param cityLat
+     * @param cityLo
+     * @param radius
+     * @param la
+     * @param lo
+     * @return true or false
+     */
+    public boolean withinCityRadius(float cityLat, float cityLo, float radius, float la, float lo) {
         if (Math.pow((cityLat - la), 2) + Math.pow((cityLo - lo), 2) <= Math.pow(radius, 2)) {
             return true;
         } else {
@@ -48,7 +60,7 @@ public class ModelService {
     /**
      * create the street light object and add the device to the city it belongs to
      *
-     * @param cityId
+     * @param cityId:    the city Id
      * @param deviceId
      * @param lat
      * @param lon
@@ -70,6 +82,20 @@ public class ModelService {
 
 
     /*Below are Person methods */
+
+    /**
+     * create resident object and save to the person maps in different classes
+     *
+     * @param personId
+     * @param name
+     * @param biometricId
+     * @param phoneNumber
+     * @param role
+     * @param lat
+     * @param lon
+     * @param blockChainAccountId
+     * @return the resident object created
+     */
     public Resident defineResident(String personId, String name, String biometricId, String phoneNumber, String role, float lat, float lon, String blockChainAccountId) {
         Resident resident = new Resident(personId, name, biometricId, phoneNumber, role, lat, lon, blockChainAccountId);
         completePersonMap.put(personId, resident);
@@ -78,6 +104,18 @@ public class ModelService {
         return resident;
     }
 
+    /**
+     * update resident info
+     *
+     * @param personId
+     * @param name
+     * @param biometricId
+     * @param phoneNumber
+     * @param role
+     * @param lat
+     * @param lon
+     * @param blockChainAccountId
+     */
     public void updateResident(String personId, String name, String biometricId, String phoneNumber,
                                String role, float lat, float lon, String blockChainAccountId) {
         Resident resident = (Resident) completePersonMap.get(personId);
@@ -96,15 +134,11 @@ public class ModelService {
         if (lat != FLOAT_EMPTY) {
             resident.setLat(lat);
         }
-
         if (lon != FLOAT_EMPTY) {
             resident.setLon(lon);
         }
-
         if (blockChainAccountId != null) {
             resident.setBlockChainAccountId(blockChainAccountId);
         }
     }
-
-
 }
