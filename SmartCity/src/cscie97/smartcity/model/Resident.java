@@ -8,8 +8,8 @@ public class Resident extends Person {
     private String blockChainAccountId;
 
     public Resident(String personId, String name, String biometricId, String phoneNumber,
-                    String role, float lat, float longt, String blockChainAccountId) {
-        super(personId, biometricId, lat, longt);
+                    String role, float lat, float lon, String blockChainAccountId) {
+        super(personId, biometricId, lat, lon);
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.role = role;

@@ -111,11 +111,11 @@ create sensor-output city_1 speaker value "severe weather alert, please take she
 ## define resident <person_id> name <name> bio-metric <string> phone <phone_number> role (adult|child|administrator) lat <lat> long <long> account <account_address>
 #
 #define resident resident_1 name jane bio-metric "voice-print='voiceprint-jane',face-print='faceprint-jane'" phone 781-222-3344 role adult lat 42.3735 long -71.1205 account janes_account
-
- Update a Resident
- update resident <person_id> [name <name>] [bio-metric <string>] [phone <phone_number>] [role (adult|child|administrator)] [lat <lat> long <long>] [account <account_address>]
-
-update resident resident_1 name jane lat 42.3830 long -71.1125
+#
+# Update a Resident
+# update resident <person_id> [name <name>] [bio-metric <string>] [phone <phone_number>] [role (adult|child|administrator)] [lat <lat> long <long>] [account <account_address>]
+#
+#update resident resident_1 name jane lat 42.3830 long -71.1125
 
 # Define a new Visitor
 # define visitor <person_id> bio-metric <string> lat <lat> long <long>

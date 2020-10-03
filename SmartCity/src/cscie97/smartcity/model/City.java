@@ -9,7 +9,7 @@ public class City {
     private String cityName;
     private String blockChainAccount;
     private float lat;
-    private float longt;
+    private float lon;
     private float radius;
 
     //association
@@ -21,15 +21,15 @@ public class City {
      * @param cityName
      * @param blockChainAccount
      * @param lat
-     * @param longt
+     * @param lon
      * @param radius
      */
-    public City(String cityId, String cityName, String blockChainAccount, float lat, float longt, float radius) {
+    public City(String cityId, String cityName, String blockChainAccount, float lat, float lon, float radius) {
         this.cityId = cityId;
         this.cityName = cityName;
         this.blockChainAccount = blockChainAccount;
         this.lat = lat;
-        this.longt = longt;
+        this.lon = lon;
         this.radius = radius;
 
         this.deviceMap = new HashMap<>();
@@ -71,12 +71,12 @@ public class City {
         this.lat = lat;
     }
 
-    public float getLongt() {
-        return longt;
+    public float getlon() {
+        return lon;
     }
 
-    public void setLongt(float longt) {
-        this.longt = longt;
+    public void setlon(float lon) {
+        this.lon = lon;
     }
 
     public float getRadius() {

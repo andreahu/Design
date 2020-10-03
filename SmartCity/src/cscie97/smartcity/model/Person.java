@@ -5,13 +5,13 @@ public abstract class Person {
     private String personId;
     private String biometricId;
     private float lat;
-    private float longt;
+    private float lon;
 
-    public Person(String personId, String biometricId, float lat, float longt) {
+    public Person(String personId, String biometricId, float lat, float lon) {
         this.biometricId = biometricId;
         this.personId = personId;
         this.lat = lat;
-        this.longt = longt;
+        this.lon = lon;
     }
 
     public String getBiometricId() {
@@ -38,11 +38,11 @@ public abstract class Person {
         this.lat = lat;
     }
 
-    public float getLongt() {
-        return longt;
+    public float getLon() {
+        return lon;
     }
 
-    public void setLongt(float longt) {
-        this.longt = longt;
+    public void setLon(float lon) {
+        this.lon = lon;
     }
 }

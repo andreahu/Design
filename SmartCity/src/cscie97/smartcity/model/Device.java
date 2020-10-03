@@ -4,20 +4,20 @@ public abstract class Device {
 
     private String deviceId;
     private float lat;
-    private float longt;
+    private float lon;
     private boolean enabled;
     private String status;
 
-    public Device(String deviceId, float lat, float longt, boolean enabled) {
+    public Device(String deviceId, float lat, float lon, boolean enabled) {
         this.deviceId = deviceId;
         this.lat = lat;
-        this.longt = longt;
+        this.lon = lon;
         this.enabled = enabled;
 //        this.status = status;
     }
 
     //getters and setters
-    
+
     public String getDeviceId() {
         return deviceId;
     }
@@ -34,12 +34,12 @@ public abstract class Device {
         this.lat = lat;
     }
 
-    public float getLongt() {
-        return longt;
+    public float getLon() {
+        return lon;
     }
 
-    public void setLongt(float longt) {
-        this.longt = longt;
+    public void setLon(float lon) {
+        this.lon = lon;
     }
 
     public boolean isEnabled() {

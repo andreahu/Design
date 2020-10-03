@@ -7,17 +7,19 @@ public class ModelService {
     private Map<String, City> cityMap;
     private Map<String, Person> completePersonMap;
 
+    public static float FLOAT_EMPTY = Float.MAX_VALUE;
+
     /**
      * @param cityId
      * @param cityName
      * @param blockChainAccount
      * @param lat
-     * @param longt
+     * @param lon
      * @param radius
      * @return the city object created
      */
-    public City defineCity(String cityId, String cityName, String blockChainAccount, float lat, float longt, float radius) {
-        City city = new City(cityId, cityName, blockChainAccount, lat, longt, radius);
+    public City defineCity(String cityId, String cityName, String blockChainAccount, float lat, float lon, float radius) {
+        City city = new City(cityId, cityName, blockChainAccount, lat, lon, radius);
         cityMap.put(cityId, city);
         return city;
     }
@@ -30,7 +32,7 @@ public class ModelService {
     public void showCity(String cityId) {
         City city = cityMap.get(cityId);
         System.out.println("City ID: " + city.getCityId() + " City Name: " + city.getCityName() + " Block Chain Account: " + city.getBlockChainAccount()
-                + " Latitude: " + city.getLat() + " Longitude: " + city.getLongt() + " radius: " + city.getRadius());
+                + " Latitude: " + city.getLat() + " Longitude: " + city.getlon() + " radius: " + city.getRadius());
     }
 
     public boolean withinCity(float cityLat, float cityLo, float radius, float la, float lo) {
@@ -49,13 +51,13 @@ public class ModelService {
      * @param cityId
      * @param deviceId
      * @param lat
-     * @param longt
+     * @param lon
      * @param enabled
      * @param brightness
      * @return the street light object created
      */
-    public StreetLight defineStreetLight(String cityId, String deviceId, float lat, float longt, boolean enabled, int brightness) {
-        StreetLight streetLight = new StreetLight(deviceId, lat, longt, enabled, brightness);
+    public StreetLight defineStreetLight(String cityId, String deviceId, float lat, float lon, boolean enabled, int brightness) {
+        StreetLight streetLight = new StreetLight(deviceId, lat, lon, enabled, brightness);
         City theCity = cityMap.get(cityId);
         theCity.getDeviceMap().put(deviceId, streetLight);
         return streetLight;
@@ -68,8 +70,8 @@ public class ModelService {
 
 
     /*Below are Person methods */
-    public Resident defineResident(String personId, String name, String biometricId, String phoneNumber, String role, float lat, float longt, String blockChainAccountId) {
-        Resident resident = new Resident(personId, name, biometricId, phoneNumber, role, lat, longt, blockChainAccountId);
+    public Resident defineResident(String personId, String name, String biometricId, String phoneNumber, String role, float lat, float lon, String blockChainAccountId) {
+        Resident resident = new Resident(personId, name, biometricId, phoneNumber, role, lat, lon, blockChainAccountId);
         completePersonMap.put(personId, resident);
         //@TODO calculate the resident's location and locate a city for him, then add to city's personMap
 
@@ -77,13 +79,13 @@ public class ModelService {
     }
 
     public void updateResident(String personId, String name, String biometricId, String phoneNumber,
-                               String role, float lat, float longt, String blockChainAccountId) {
+                               String role, float lat, float lon, String blockChainAccountId) {
         Resident resident = (Resident) completePersonMap.get(personId);
         if (name != null) {
             resident.setName(name);
         }
         if (biometricId != null) {
-
+            resident.setBiometricId(biometricId);
         }
         if (phoneNumber != null) {
             resident.setPhoneNumber(phoneNumber);
@@ -91,9 +93,13 @@ public class ModelService {
         if (role != null) {
             resident.setRole(role);
         }
+        if (lat != FLOAT_EMPTY) {
+            resident.setLat(lat);
+        }
 
-        resident.setLat(lat);
-        resident.setLongt(longt);
+        if (lon != FLOAT_EMPTY) {
+            resident.setLon(lon);
+        }
 
         if (blockChainAccountId != null) {
             resident.setBlockChainAccountId(blockChainAccountId);
