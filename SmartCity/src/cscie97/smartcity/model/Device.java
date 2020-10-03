@@ -5,7 +5,7 @@ public abstract class Device {
     private String deviceId;
     private float lat;
     private float lon;
-    private boolean enabled;
+    private Boolean enabled;
     private String status;
 
     public Device(String deviceId, float lat, float lon, boolean enabled) {
