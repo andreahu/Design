@@ -9,7 +9,6 @@ public class StreetLight extends Device {
         this.brightness = brightness;
     }
 
-    
     public int getBrightness() {
         return brightness;
     }

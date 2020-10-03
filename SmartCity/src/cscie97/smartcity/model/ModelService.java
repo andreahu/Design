@@ -32,6 +32,18 @@ public class ModelService {
                 + " Latitude: " + city.getLat() + " Longitude: " + city.getLongt() + " radius: " + city.getRadius());
     }
 
+    public Boolean withinCity(float cityLat, float cityLo, float radius, float la, float lo) {
+        if (Math.pow((cityLat - la), 2) + Math.pow((cityLo - lo), 2) <= Math.pow(radius, 2)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public City findCity() {
+        
+    }
+
     /*Below are Device methods */
 
     /**
@@ -54,14 +66,24 @@ public class ModelService {
 
     public void updateStreetLight(String cityId, String deviceId, boolean enabled, int brightness) {
         Device streetLight = cityMap.get(cityId).getDeviceMap().get(deviceId);
-        streetLight.setBrightness(brightness);
+        ((StreetLight) streetLight).setBrightness(brightness);
     }
 
 
     /*Below are Person methods */
-
     public Resident defineResident(String personId, String name, String biometricId, String phoneNumber, String role, float lat, float longt, String blockChainAccountId) {
         Resident resident = new Resident(personId, name, biometricId, phoneNumber, role, lat, longt, blockChainAccountId);
+        //@TODO calculate the resident's location and location a city for him
+
+
+        return resident;
+    }
+
+    public void updateResident(String personId, String name, String biometricId, String phoneNumber, String role, float lat, float longt, String blockChainAccountId) {
+        if (personId != null) {
+
+        }
+
     }
 
 
