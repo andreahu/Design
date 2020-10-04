@@ -69,14 +69,14 @@ public class ModelService {
      * @return
      */
     public City findCity(float lat, float lon) {
-        for (Map.Entry<String, City> entry : this.cityMap.entrySet()) {
-            City city = entry.getValue();
-            if (withinCity(city.getLat(), city.getlon(), city.getRadius(), lat, lon)) {
-                return city;
+        for (City c : cityMap.values()) {
+            if (withinCity(c.getLat(), c.getlon(), c.getRadius(), lat, lon)) {
+                return c;
             }
         }
         return null;
     }
+
 
     /*Below are Device methods */
 
@@ -285,7 +285,7 @@ public class ModelService {
         Device device = cityMap.get(cityId).getDeviceMap().get(deviceId);
         device.setSensorType(sensorType);
         device.setSensorValue(sensorValue);
-        device.setSensorSubject(sensorSubject);
+        if (sensorSubject != null) device.setSensorSubject(sensorSubject);
     }
 
     public void createSensorOutput(String cityId, String deviceId, String sensorType, String sensorValue) {
@@ -375,5 +375,11 @@ public class ModelService {
         if (biometricId != null) resident.setBiometricId(biometricId);
         if (lat != FLOAT_EMPTY) resident.setLat(lat);
         if (lon != FLOAT_EMPTY) resident.setLon(lon);
+    }
+
+    public void showPerson(String personId) {
+        Person p = masterPersonMap.get(personId);
+        System.out.println("Person ID: " + p.getPersonId() + " Bio_Metric: " + p.getBiometricId() + " Lat and Lon: " + p.getLat() + p.getLon()
+                + " the class of the Person is: " + p.getClass());
     }
 }

@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 public class CommandProcessor {
 
+    public static float FLOAT_EMPTY = Float.MAX_VALUE;
 
     public void processCommand(String command) throws CommandProcessorException {
 
@@ -22,38 +23,58 @@ public class CommandProcessor {
         }
 
         String theCommand = list.get(0) + " " + list.get(1);
-        String cityDevice[] = list.get(2).split(":");//when used, cityId=cityDevice[0]; deviceId=cityDevice[1]
+        String[] cityDevicePair = list.get(2).split(":");
+        String city_id = cityDevicePair[0];
+        String device_id = cityDevicePair[1];
 
         Map<String, String> map = new HashMap<>();
+        map.put("name", null);
+        map.put("bio-metric", null);
+        map.put("phone", null);
+        map.put("role", null);
+        map.put("lat", null);//@TODO this should be float?
+        map.put("long", null);//@TODO this should be float?
+        map.put("account", null);
+        map.put("enabled", null);
+        map.put("image", null);
+        map.put("brightness", null);
+        map.put("activity", null);
+        map.put("fee", null);
+        map.put("subject", null);
+        map.put("type", null);
+        map.put("value", null);
+
         for (int i = 0; i < list.size(); i++) {
-            switch (list.get(i)) {
-                case "":
-
-                    break;
-
-                case "":
-
-                    break;
-
-                case "":
-
-                    break;
-
-                case "":
-
-                    break;
-
-                case "":
-
-                    break;
-
-                case "":
-
-                    break;
-
-
+            if (map.containsKey(list.get(i))) {
+                map.put(list.get(i), list.get(i + 1));
             }
         }
+
+        String name = map.get("name");
+        String bio_metric = map.get("bio-metri");
+        String phone = map.get("phone");
+        String role = map.get("role");
+        String account = map.get("account");
+        String enabled = map.get("enabled");
+        String image = map.get("image");
+        String brightness = map.get("brightness");
+        String activity = map.get("activity");
+        String fee = map.get("fee");
+        String subject = map.get("subject");
+        String type = map.get("type");
+        String value = map.get("value");
+
+        String latString = map.get("lat");
+        float lat = FLOAT_EMPTY;
+        if (latString != null) {
+            lat = Float.parseFloat(latString);
+        }
+        String lonString = map.get("long");
+        float lon = FLOAT_EMPTY;
+        if (lonString != null) {
+            lon = Float.parseFloat(lonString);
+        }
+
 
         try {
 
@@ -70,96 +91,92 @@ public class CommandProcessor {
                     break;
 
                 case "define street-sign":
-                    modelService.defineStreetSign(cityDevice[0], cityDevice[1], Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
+                    modelService.defineStreetSign(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
                     break;
 
                 case "update street-sign":
-                    modelService.updateStreetSign(cityDevice[0], cityDevice[1], list.get(4));
+                    modelService.updateStreetSign(city_id, device_id, list.get(4));
                     break;
 
                 case "define info-kiosk":
-                    modelService.defineKiosk(cityDevice[0], cityDevice[1], Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
+                    modelService.defineKiosk(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
                     break;
 
                 case "update info-kiosk":
-                    //@TODO: Optional parameter: enabled and imagelink
+                    modelService.updateKiosk(city_id, device_id, enabled, brightness);
                     break;
 
                 case "define street-light":
-                    modelService.defineStreetLight(cityDevice[0], cityDevice[1], Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
+                    modelService.defineStreetLight(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
                     break;
 
                 case "update street-light":
-                    //@TODO: Optional parameter: enabled and brightness
+                    modelService.updateStreetLight(city_id, device_id, enabled, image);
                     break;
 
                 case "define parking-space":
-                    modelService.defineParkingSpace(cityDevice[0], cityDevice[1], Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
+                    modelService.defineParkingSpace(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
                     break;
 
                 case "update parking-space":
-                    modelService.updateParkingSpace(cityDevice[0], cityDevice[1], list.get(4));
+                    modelService.updateParkingSpace(city_id, device_id, list.get(4));
                     break;
 
                 case "define robot":
-                    modelService.defineRobot(cityDevice[0], cityDevice[1], Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
+                    modelService.defineRobot(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
                     break;
 
                 case "update robot":
-                    //@TODO: Optional parameter: lat, lon, activity
+                    modelService.updateRobot(city_id, device_id, lat, lon, activity);
                     break;
 
                 case "define vehicle":
-                    modelService.defineVehicle(cityDevice[0], cityDevice[1], Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10), list.get(12), list.get(14), list.get(16));
+                    modelService.defineVehicle(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10), list.get(12), list.get(14), list.get(16));
                     break;
 
                 case "update vehicle":
-                    //@TODO: Optional parameter: lat, lon, activity, enabled
+                    modelService.updateVehicle(city_id, device_id, lat, lon, enabled, activity);
                     break;
 
                 case "show device":
-                    if (cityDevice.length == 2) {
-                        modelService.showDevice(cityDevice[0], cityDevice[1]);
+                    if (cityDevicePair.length == 2) {
+                        modelService.showDevice(city_id, device_id);
                     } else {
-                        modelService.showDevice(cityDevice[0]);
+                        modelService.showDevice(city_id);
                     }
                     break;
 
                 case "create sensor-event":
-                    //@TODO: Optional parameter: subject
-
+                    modelService.createSensorEvent(city_id, device_id, map.get("type"), map.get("value"), map.get("subject"));
                     break;
 
                 case "create sensor-output":
-                    if (cityDevice.length == 2) {
-                        modelService.createSensorOutput(cityDevice[0], cityDevice[1], list.get(4), list.get(6));
+                    if (cityDevicePair.length == 2) {
+                        modelService.createSensorOutput(city_id, device_id, list.get(4), list.get(6));
                     } else {
-                        modelService.createSensorOutput(cityDevice[0], list.get(4), list.get(6));
+                        modelService.createSensorOutput(city_id, list.get(4), list.get(6));
                     }
                     break;
 
                 case "define resident":
-
-
+                    modelService.defineResident(list.get(2), name, bio_metric, phone, role, lat, lon, account);
                     break;
 
                 case "update resident":
-
+                    modelService.updateResident(list.get(2), name, bio_metric, phone, role, lat, lon, account);
                     break;
 
                 case "define visitor":
-
+                    modelService.defineVisitor(list.get(2), bio_metric, lat, lon);
                     break;
 
                 case "update visitor":
-
+                    modelService.updateVisitor(list.get(2), bio_metric, lat, lon);
                     break;
 
                 case "show person":
-
+                    modelService.showPerson(list.get(2));
                     break;
-
-
             }
         } catch (CommandProcessorException e) {
             System.out.println(e.getMessage());
