@@ -36,7 +36,7 @@ public class CommandProcessor {
 
                 case "define street-sign":
                     String cityDevice[] = list.get(2).split(":");//cityId=cityDevice[0]; deviceId=cityDevice[1]
-                    modelService.defineStreetSign(cityDevice[0], cityDevice[1], )
+                    modelService.defineStreetSign(cityDevice[0], cityDevice[1], Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
 
                     break;
 

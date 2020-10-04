@@ -74,7 +74,7 @@ public class ModelService {
      * @param text
      * @return
      */
-    public StreetSign defineStreetSign(String cityId, String deviceId, float lat, float lon, Boolean enabled, String text) {
+    public StreetSign defineStreetSign(String cityId, String deviceId, float lat, float lon, String enabled, String text) {
         StreetSign streetSign = new StreetSign(deviceId, lat, lon, enabled, text);
         City theCity = cityMap.get(cityId);
         theCity.getDeviceMap().put(deviceId, streetSign);
@@ -104,7 +104,7 @@ public class ModelService {
      * @param imageLink
      * @return the kiosk object created
      */
-    public Kiosk defineKiosk(String cityId, String deviceId, float lat, float lon, Boolean enabled, String imageLink) {
+    public Kiosk defineKiosk(String cityId, String deviceId, float lat, float lon, String enabled, String imageLink) {
         Kiosk kiosk = new Kiosk(deviceId, lat, lon, enabled, imageLink);
         City theCity = cityMap.get(cityId);
         theCity.getDeviceMap().put(deviceId, kiosk);
@@ -119,7 +119,7 @@ public class ModelService {
      * @param enabled
      * @param imageLink
      */
-    public void updateKiosk(String cityId, String deviceId, Boolean enabled, String imageLink) {
+    public void updateKiosk(String cityId, String deviceId, String enabled, String imageLink) {
         Device kiosk = cityMap.get(cityId).getDeviceMap().get(deviceId);
         if (enabled != null) kiosk.setEnabled(enabled);
         if (imageLink != null) ((Kiosk) kiosk).setImageLink(imageLink);
@@ -136,7 +136,7 @@ public class ModelService {
      * @param brightness
      * @return the street light object created
      */
-    public StreetLight defineStreetLight(String cityId, String deviceId, float lat, float lon, Boolean enabled, int brightness) {
+    public StreetLight defineStreetLight(String cityId, String deviceId, float lat, float lon, String enabled, int brightness) {
         StreetLight streetLight = new StreetLight(deviceId, lat, lon, enabled, brightness);
         City theCity = cityMap.get(cityId);
         theCity.getDeviceMap().put(deviceId, streetLight);
@@ -151,7 +151,7 @@ public class ModelService {
      * @param enabled
      * @param brightness
      */
-    public void updateStreetLight(String cityId, String deviceId, Boolean enabled, int brightness) {
+    public void updateStreetLight(String cityId, String deviceId, String enabled, int brightness) {
         Device streetLight = cityMap.get(cityId).getDeviceMap().get(deviceId);
         ((StreetLight) streetLight).setBrightness(brightness);
     }
@@ -167,7 +167,7 @@ public class ModelService {
      * @param rate
      * @return the created object
      */
-    public ParkingSpace defineParkingSpace(String cityId, String deviceId, float lat, float lon, Boolean enabled, int rate) {
+    public ParkingSpace defineParkingSpace(String cityId, String deviceId, float lat, float lon, String enabled, int rate) {
         ParkingSpace parkingSpace = new ParkingSpace(deviceId, lat, lon, enabled, rate);
         City theCity = cityMap.get(cityId);
         theCity.getDeviceMap().put(deviceId, parkingSpace);
@@ -182,7 +182,7 @@ public class ModelService {
      * @param enabled
      * @param rate
      */
-    public void updateParkingSpace(String cityId, String deviceId, Boolean enabled, int rate) {
+    public void updateParkingSpace(String cityId, String deviceId, String enabled, int rate) {
         Device parkingSpace = cityMap.get(cityId).getDeviceMap().get(deviceId);
         ((ParkingSpace) parkingSpace).setRate(rate);
     }
@@ -198,7 +198,7 @@ public class ModelService {
      * @param activity
      * @return robot
      */
-    public Robot defineRobot(String cityId, String deviceId, float lat, float lon, Boolean enabled, String activity) {
+    public Robot defineRobot(String cityId, String deviceId, float lat, float lon, String enabled, String activity) {
         Robot robot = new Robot(deviceId, lat, lon, enabled, activity);
         City theCity = cityMap.get(cityId);
         theCity.getDeviceMap().put(deviceId, robot);
@@ -226,14 +226,14 @@ public class ModelService {
      * @param fee
      * @return vehicle object
      */
-    public Vehicle defineVehicle(String cityId, String deviceId, float lat, float lon, Boolean enabled, String type, String activity, int capacity, int fee) {
+    public Vehicle defineVehicle(String cityId, String deviceId, float lat, float lon, String enabled, String type, String activity, int capacity, int fee) {
         Vehicle vehicle = new Vehicle(deviceId, lat, lon, enabled, type, activity, capacity, fee);
         City theCity = cityMap.get(cityId);
         theCity.getDeviceMap().put(deviceId, vehicle);
         return vehicle;
     }
 
-    public void updateVehicle(String cityId, String deviceId, float lat, float lon, Boolean enabled, String activity) {
+    public void updateVehicle(String cityId, String deviceId, float lat, float lon, String enabled, String activity) {
         Device vehicle = cityMap.get(cityId).getDeviceMap().get(deviceId);
         if (lat != FLOAT_EMPTY) vehicle.setLat(lat);
         if (lon != FLOAT_EMPTY) vehicle.setLon(lon);

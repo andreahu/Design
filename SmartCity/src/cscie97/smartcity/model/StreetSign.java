@@ -3,7 +3,7 @@ package cscie97.smartcity.model;
 public class StreetSign extends Device {
     private String text;
 
-    public StreetSign(String deviceId, float lat, float lon, boolean enabled, String text) {
+    public StreetSign(String deviceId, float lat, float lon, String enabled, String text) {
         super(deviceId, lat, lon, enabled);
         this.text = text;
     }

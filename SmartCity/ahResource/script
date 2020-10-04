@@ -19,7 +19,7 @@
 define street-sign city_1:ss_1 lat 42.3732 long -71.1202 enabled true text "Welcome to Harvard Square"
 define street-sign city_1:ss_2 lat 42.3736 long -71.1214 enabled true text "Brattle Theatre"
 
-defineStreetSign(String cityId, String deviceId, float lat, float lon, Boolean enabled, String text) {
+float lat, float lon, Boolean enabled, String text) {
 
 
 # update a street sign

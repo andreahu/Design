@@ -6,7 +6,7 @@ public class Vehicle extends Device {
     private int capacity;
     private int fee;
 
-    public Vehicle(String deviceId, float lat, float lon, Boolean enabled, String type, String activity, int capacity, int fee) {
+    public Vehicle(String deviceId, float lat, float lon, String enabled, String type, String activity, int capacity, int fee) {
         super(deviceId, lat, lon, enabled);
         this.type = type;
         this.activity = activity;

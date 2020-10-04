@@ -5,7 +5,7 @@ public abstract class Device {
     private String deviceId;
     private float lat;
     private float lon;
-    private Boolean enabled;
+    private String enabled;
     private String status;
 
     private String sensorType;//microphone|camera|thermometer|co2meter
@@ -13,7 +13,7 @@ public abstract class Device {
     private String sensorSubject;
 
 
-    public Device(String deviceId, float lat, float lon, Boolean enabled) {
+    public Device(String deviceId, float lat, float lon, String enabled) {
         this.deviceId = deviceId;
         this.lat = lat;
         this.lon = lon;
@@ -54,11 +54,11 @@ public abstract class Device {
         this.status = status;
     }
 
-    public Boolean getEnabled() {
+    public String getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(Boolean enabled) {
+    public void setEnabled(String enabled) {
         this.enabled = enabled;
     }
 
