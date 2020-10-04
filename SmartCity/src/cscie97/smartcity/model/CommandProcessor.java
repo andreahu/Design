@@ -24,8 +24,12 @@ public class CommandProcessor {
 
         String theCommand = list.get(0) + " " + list.get(1);
         String[] cityDevicePair = list.get(2).split(":");
-        String city_id = cityDevicePair[0];
-        String device_id = cityDevicePair[1];
+        String city_id = null;
+        String device_id = null;
+        if (cityDevicePair.length == 2) {
+            city_id = cityDevicePair[0];
+            device_id = cityDevicePair[1];
+        }
 
         Map<String, String> map = new HashMap<>();
         map.put("name", null);
@@ -80,7 +84,7 @@ public class CommandProcessor {
 
             switch (theCommand) {
                 case "define city":
-                    if (list.size() != 13) {
+                    if (list.size() < 10) {
                         throw new CommandProcessorException("defineCity", "wrong number of arguments", 0);
                     }
                     modelService.defineCity(list.get(2), list.get(4), list.get(6), Float.parseFloat(list.get(8)), Float.parseFloat(list.get(10)), Float.parseFloat(list.get(12)));
