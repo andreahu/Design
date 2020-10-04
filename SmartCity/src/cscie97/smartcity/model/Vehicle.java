@@ -3,10 +3,10 @@ package cscie97.smartcity.model;
 public class Vehicle extends Device {
     private String type;
     private String activity;
-    private int capacity;
-    private int fee;
+    private String capacity;
+    private String fee;
 
-    public Vehicle(String deviceId, float lat, float lon, String enabled, String type, String activity, int capacity, int fee) {
+    public Vehicle(String deviceId, float lat, float lon, String enabled, String type, String activity, String capacity, String fee) {
         super(deviceId, lat, lon, enabled);
         this.type = type;
         this.activity = activity;
@@ -30,19 +30,19 @@ public class Vehicle extends Device {
         this.activity = activity;
     }
 
-    public int getCapacity() {
+    public String getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(int capacity) {
+    public void setCapacity(String capacity) {
         this.capacity = capacity;
     }
 
-    public int getFee() {
+    public String getFee() {
         return fee;
     }
 
-    public void setFee(int fee) {
+    public void setFee(String fee) {
         this.fee = fee;
     }
 }

@@ -14,7 +14,7 @@ public class City {
 
     //association
     private Map<String, Device> deviceMap;
-    private Map<Integer, Person> personMap;
+    private Map<String, Person> personMap;
 
     /**
      * @param cityId
@@ -95,11 +95,11 @@ public class City {
         this.deviceMap = deviceMap;
     }
 
-    public Map<Integer, Person> getPersonMap() {
+    public Map<String, Person> getPersonMap() {
         return personMap;
     }
 
-    public void setPersonMap(Map<Integer, Person> personMap) {
+    public void setPersonMap(Map<String, Person> personMap) {
         this.personMap = personMap;
     }
 }

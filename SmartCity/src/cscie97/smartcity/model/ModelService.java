@@ -61,6 +61,23 @@ public class ModelService {
         }
     }
 
+    /**
+     * find the city by the location
+     *
+     * @param lat
+     * @param lon
+     * @return
+     */
+    public City findCity(float lat, float lon) {
+        for (Map.Entry<String, City> entry : this.cityMap.entrySet()) {
+            City city = entry.getValue();
+            if (withinCity(city.getLat(), city.getlon(), city.getRadius(), lat, lon)) {
+                return city;
+            }
+        }
+        return null;
+    }
+
     /*Below are Device methods */
 
     /**
@@ -136,7 +153,7 @@ public class ModelService {
      * @param brightness
      * @return the street light object created
      */
-    public StreetLight defineStreetLight(String cityId, String deviceId, float lat, float lon, String enabled, int brightness) {
+    public StreetLight defineStreetLight(String cityId, String deviceId, float lat, float lon, String enabled, String brightness) {
         StreetLight streetLight = new StreetLight(deviceId, lat, lon, enabled, brightness);
         City theCity = cityMap.get(cityId);
         theCity.getDeviceMap().put(deviceId, streetLight);
@@ -151,9 +168,10 @@ public class ModelService {
      * @param enabled
      * @param brightness
      */
-    public void updateStreetLight(String cityId, String deviceId, String enabled, int brightness) {
+    public void updateStreetLight(String cityId, String deviceId, String enabled, String brightness) {
         Device streetLight = cityMap.get(cityId).getDeviceMap().get(deviceId);
-        ((StreetLight) streetLight).setBrightness(brightness);
+        if (enabled != null) ((StreetLight) streetLight).setEnabled(enabled);
+        if (brightness != null) ((StreetLight) streetLight).setBrightness(brightness);
     }
 
     /**
@@ -167,7 +185,7 @@ public class ModelService {
      * @param rate
      * @return the created object
      */
-    public ParkingSpace defineParkingSpace(String cityId, String deviceId, float lat, float lon, String enabled, int rate) {
+    public ParkingSpace defineParkingSpace(String cityId, String deviceId, float lat, float lon, String enabled, String rate) {
         ParkingSpace parkingSpace = new ParkingSpace(deviceId, lat, lon, enabled, rate);
         City theCity = cityMap.get(cityId);
         theCity.getDeviceMap().put(deviceId, parkingSpace);
@@ -179,10 +197,9 @@ public class ModelService {
      *
      * @param cityId
      * @param deviceId
-     * @param enabled
      * @param rate
      */
-    public void updateParkingSpace(String cityId, String deviceId, String enabled, int rate) {
+    public void updateParkingSpace(String cityId, String deviceId, String rate) {
         Device parkingSpace = cityMap.get(cityId).getDeviceMap().get(deviceId);
         ((ParkingSpace) parkingSpace).setRate(rate);
     }
@@ -226,7 +243,7 @@ public class ModelService {
      * @param fee
      * @return vehicle object
      */
-    public Vehicle defineVehicle(String cityId, String deviceId, float lat, float lon, String enabled, String type, String activity, int capacity, int fee) {
+    public Vehicle defineVehicle(String cityId, String deviceId, float lat, float lon, String enabled, String type, String activity, String capacity, String fee) {
         Vehicle vehicle = new Vehicle(deviceId, lat, lon, enabled, type, activity, capacity, fee);
         City theCity = cityMap.get(cityId);
         theCity.getDeviceMap().put(deviceId, vehicle);
@@ -299,7 +316,9 @@ public class ModelService {
     public Resident defineResident(String personId, String name, String biometricId, String phoneNumber, String role, float lat, float lon, String blockChainAccountId) {
         Resident resident = new Resident(personId, name, biometricId, phoneNumber, role, lat, lon, blockChainAccountId);
         masterPersonMap.put(personId, resident);
-        //@TODO:find the city by the lat and lon, and add resident to the city's personMap
+        //find the person's city and add him into the city's personMap
+        City city = findCity(lat, lon);
+        city.getPersonMap().put(personId, resident);
         return resident;
     }
 
@@ -335,10 +354,12 @@ public class ModelService {
      * @param lat
      * @param lon
      */
-    public void defineVisitor(String personId, String biometricId, float lat, float lon) {
+    public Visitor defineVisitor(String personId, String biometricId, float lat, float lon) {
         Visitor visitor = new Visitor(personId, biometricId, lat, lon);
         masterPersonMap.put(personId, visitor);
-        //@TODO:find the city by the lat and lon, and add visitor to the city's personMap
+        City city = findCity(lat, lon);
+        city.getPersonMap().put(personId, visitor);
+        return visitor;
     }
 
     /**

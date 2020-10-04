@@ -17,11 +17,46 @@ public class CommandProcessor {
 
         List<String> list = new ArrayList<String>();
         Matcher m = Pattern.compile("([^\"]\\S*|\".+?\")\\s*").matcher(command);
-        while (m.find())
-            list.add(m.group(1)); // Add .replace("\"", "") to remove surrounding quotes.
+        while (m.find()) {// Add .replace("\"", "") to remove surrounding quotes.
+            list.add(m.group(1));
+        }
+
+        String theCommand = list.get(0) + " " + list.get(1);
+        String cityDevice[] = list.get(2).split(":");//when used, cityId=cityDevice[0]; deviceId=cityDevice[1]
+
+        Map<String, String> map = new HashMap<>();
+        for (int i = 0; i < list.size(); i++) {
+            switch (list.get(i)) {
+                case "":
+
+                    break;
+
+                case "":
+
+                    break;
+
+                case "":
+
+                    break;
+
+                case "":
+
+                    break;
+
+                case "":
+
+                    break;
+
+                case "":
+
+                    break;
+
+
+            }
+        }
 
         try {
-            String theCommand = list.get(0) + " " + list.get(1);
+
             switch (theCommand) {
                 case "define city":
                     if (list.size() != 13) {
@@ -35,68 +70,76 @@ public class CommandProcessor {
                     break;
 
                 case "define street-sign":
-                    String cityDevice[] = list.get(2).split(":");//cityId=cityDevice[0]; deviceId=cityDevice[1]
                     modelService.defineStreetSign(cityDevice[0], cityDevice[1], Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
-
                     break;
 
                 case "update street-sign":
-
+                    modelService.updateStreetSign(cityDevice[0], cityDevice[1], list.get(4));
                     break;
 
                 case "define info-kiosk":
-
+                    modelService.defineKiosk(cityDevice[0], cityDevice[1], Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
                     break;
 
                 case "update info-kiosk":
-
+                    //@TODO: Optional parameter: enabled and imagelink
                     break;
 
                 case "define street-light":
-
+                    modelService.defineStreetLight(cityDevice[0], cityDevice[1], Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
                     break;
 
                 case "update street-light":
-
+                    //@TODO: Optional parameter: enabled and brightness
                     break;
 
                 case "define parking-space":
-
+                    modelService.defineParkingSpace(cityDevice[0], cityDevice[1], Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
                     break;
 
                 case "update parking-space":
-
+                    modelService.updateParkingSpace(cityDevice[0], cityDevice[1], list.get(4));
                     break;
 
                 case "define robot":
-
+                    modelService.defineRobot(cityDevice[0], cityDevice[1], Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
                     break;
 
                 case "update robot":
-
+                    //@TODO: Optional parameter: lat, lon, activity
                     break;
 
                 case "define vehicle":
-
+                    modelService.defineVehicle(cityDevice[0], cityDevice[1], Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10), list.get(12), list.get(14), list.get(16));
                     break;
 
                 case "update vehicle":
-
+                    //@TODO: Optional parameter: lat, lon, activity, enabled
                     break;
 
                 case "show device":
-
+                    if (cityDevice.length == 2) {
+                        modelService.showDevice(cityDevice[0], cityDevice[1]);
+                    } else {
+                        modelService.showDevice(cityDevice[0]);
+                    }
                     break;
 
                 case "create sensor-event":
+                    //@TODO: Optional parameter: subject
 
                     break;
 
                 case "create sensor-output":
-
+                    if (cityDevice.length == 2) {
+                        modelService.createSensorOutput(cityDevice[0], cityDevice[1], list.get(4), list.get(6));
+                    } else {
+                        modelService.createSensorOutput(cityDevice[0], list.get(4), list.get(6));
+                    }
                     break;
 
                 case "define resident":
+
 
                     break;
 
