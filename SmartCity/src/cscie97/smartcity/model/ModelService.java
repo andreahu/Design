@@ -9,6 +9,11 @@ public class ModelService {
 
     public static float FLOAT_EMPTY = Float.MAX_VALUE;
 
+    public ModelService(Map<String, City> cityMap, Map<String, Person> masterPersonMap) {
+        this.cityMap = cityMap;
+        this.masterPersonMap = masterPersonMap;
+    }
+
     /**
      * create city object and save to the city map
      *
@@ -23,6 +28,7 @@ public class ModelService {
     public City defineCity(String cityId, String cityName, String blockChainAccount, float lat, float lon, float radius) {
         City city = new City(cityId, cityName, blockChainAccount, lat, lon, radius);
         cityMap.put(cityId, city);
+        System.out.println("City defined. City ID: " + city.getCityId());
         return city;
     }
 
