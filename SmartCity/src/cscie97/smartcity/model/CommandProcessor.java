@@ -54,7 +54,7 @@ public class CommandProcessor {
         }
 
         String name = map.get("name");
-        String bio_metric = map.get("bio-metri");
+        String bio_metric = map.get("bio-metric");
         String phone = map.get("phone");
         String role = map.get("role");
         String account = map.get("account");

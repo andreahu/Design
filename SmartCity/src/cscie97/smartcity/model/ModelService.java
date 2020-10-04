@@ -398,7 +398,7 @@ public class ModelService {
 
     public void showPerson(String personId) {
         Person p = masterPersonMap.get(personId);
-        System.out.println("Person ID: " + p.getPersonId() + " Bio_Metric: " + p.getBiometricId() + " Lat and Lon: " + p.getLat() + p.getLon()
+        System.out.println("Person ID: " + p.getPersonId() + " Bio_Metric: " + p.getBiometricId() + " Lat and Lon: " + p.getLat() + "，" + p.getLon()
                 + " the class of the Person is: " + p.getClass());
     }
 }
