@@ -113,7 +113,6 @@ public class ModelService {
      * @param enabled
      * @param imageLink
      */
-    //@TODO: enabled and imagelink are both optional in script
     public void updateKiosk(String cityId, String deviceId, Boolean enabled, String imageLink) {
         Device kiosk = cityMap.get(cityId).getDeviceMap().get(deviceId);
         if (enabled != null) kiosk.setEnabled(enabled);
@@ -182,6 +181,91 @@ public class ModelService {
         ((ParkingSpace) parkingSpace).setRate(rate);
     }
 
+    /**
+     * create robot object
+     *
+     * @param cityId
+     * @param deviceId
+     * @param lat
+     * @param lon
+     * @param enabled
+     * @param activity
+     * @return robot
+     */
+    public Robot defineRobot(String cityId, String deviceId, float lat, float lon, Boolean enabled, String activity) {
+        Robot robot = new Robot(deviceId, lat, lon, enabled, activity);
+        City theCity = cityMap.get(cityId);
+        theCity.getDeviceMap().put(deviceId, robot);
+        return robot;
+    }
+
+    public void updateRobot(String cityId, String deviceId, float lat, float lon, String activity) {
+        Device robot = cityMap.get(cityId).getDeviceMap().get(deviceId);
+        if (lat != FLOAT_EMPTY) robot.setLat(lat);
+        if (lon != FLOAT_EMPTY) robot.setLon(lon);
+        if (activity != null) ((Robot) robot).setActivity(activity);
+    }
+
+    /**
+     * create vehicle object
+     *
+     * @param cityId
+     * @param deviceId
+     * @param lat
+     * @param lon
+     * @param enabled
+     * @param type
+     * @param activity
+     * @param capacity
+     * @param fee
+     * @return vehicle object
+     */
+    public Vehicle defineVehicle(String cityId, String deviceId, float lat, float lon, Boolean enabled, String type, String activity, int capacity, int fee) {
+        Vehicle vehicle = new Vehicle(deviceId, lat, lon, enabled, type, activity, capacity, fee);
+        City theCity = cityMap.get(cityId);
+        theCity.getDeviceMap().put(deviceId, vehicle);
+        return vehicle;
+    }
+
+    public void updateVehicle(String cityId, String deviceId, float lat, float lon, Boolean enabled, String activity) {
+        Device vehicle = cityMap.get(cityId).getDeviceMap().get(deviceId);
+        if (lat != FLOAT_EMPTY) vehicle.setLat(lat);
+        if (lon != FLOAT_EMPTY) vehicle.setLon(lon);
+        if (enabled != null) vehicle.setEnabled(enabled);
+        if (activity != null) ((Vehicle) vehicle).setActivity(activity);
+    }
+
+    /**
+     * print device IDs in a city
+     *
+     * @param cityId
+     */
+    public void showDevice(String cityId) {
+        Map<String, Device> map = cityMap.get(cityId).getDeviceMap();
+        System.out.println("This is a list of the devices IDs in the city: " + map.keySet());
+    }
+
+    /**
+     * print info for a device
+     *
+     * @param cityId
+     * @param deviceId
+     */
+    public void showDevice(String cityId, String deviceId) {
+        Device device = cityMap.get(cityId).getDeviceMap().get(deviceId);
+        System.out.println("Device ID: " + device.getDeviceId() + " Lat and Lon: " + device.getLat() + device.getLon()
+                + " the class of the Device is: " + device.getClass());
+    }
+
+
+    public void createSensorEvent(String cityId, String deviceId, String sensorType, String sensorValue, String sensorSubject) {
+        Device device = cityMap.get(cityId).getDeviceMap().get(deviceId);
+        device.setSensorType(sensorType);
+        device.setSensorValue(sensorValue);
+        device.setSensorSubject(sensorSubject);
+    }
+    
+
     //Below are Person methods
 
     /**
@@ -216,7 +300,6 @@ public class ModelService {
      * @param lon
      * @param blockChainAccountId
      */
-    //@TODO all parameters except for personID are optional in script
     public void updateResident(String personId, String name, String biometricId, String phoneNumber,
                                String role, float lat, float lon, String blockChainAccountId) {
         Resident resident = (Resident) masterPersonMap.get(personId);
@@ -251,7 +334,6 @@ public class ModelService {
      * @param lat
      * @param lon
      */
-    //@TODO all parameters except for personID are optional in script
     public void updateVisitor(String personId, String biometricId, float lat, float lon) {
         Resident resident = (Resident) masterPersonMap.get(personId);
         if (biometricId != null) resident.setBiometricId(biometricId);

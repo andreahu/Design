@@ -33,7 +33,7 @@ public class City {
         this.radius = radius;
 
         this.deviceMap = new HashMap<>();
-//        this.personMap = new HashMap<>();
+        this.personMap = new HashMap<>();
     }
 
 

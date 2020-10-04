@@ -8,12 +8,16 @@ public abstract class Device {
     private Boolean enabled;
     private String status;
 
-    public Device(String deviceId, float lat, float lon, boolean enabled) {
+    private String sensorType;//microphone|camera|thermometer|co2meter
+    private String sensorValue;
+    private String sensorSubject;
+
+
+    public Device(String deviceId, float lat, float lon, Boolean enabled) {
         this.deviceId = deviceId;
         this.lat = lat;
         this.lon = lon;
         this.enabled = enabled;
-//        this.status = status;
     }
 
     //getters and setters
@@ -42,19 +46,44 @@ public abstract class Device {
         this.lon = lon;
     }
 
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+
+    public String getSensorType() {
+        return sensorType;
+    }
+
+    public void setSensorType(String sensorType) {
+        this.sensorType = sensorType;
+    }
+
+    public String getSensorValue() {
+        return sensorValue;
+    }
+
+    public void setSensorValue(String sensorValue) {
+        this.sensorValue = sensorValue;
+    }
+
+    public String getSensorSubject() {
+        return sensorSubject;
+    }
+
+    public void setSensorSubject(String sensorSubject) {
+        this.sensorSubject = sensorSubject;
     }
 }
