@@ -290,7 +290,7 @@ public class ModelService {
      */
     public void showDevice(String cityId, String deviceId) {
         Device device = cityMap.get(cityId).getDeviceMap().get(deviceId);
-        System.out.println("For City ID: " + cityId + "Device ID: " + device.getDeviceId() + " Lat and Lon: " + device.getLat() + device.getLon()
+        System.out.println("For City ID: " + cityId + " Device ID: " + device.getDeviceId() + " Lat and Lon: " + device.getLat() + device.getLon()
                 + " the class of the Device is: " + device.getClass());
     }
 
@@ -389,10 +389,10 @@ public class ModelService {
      * @param lon
      */
     public void updateVisitor(String personId, String biometricId, float lat, float lon) {
-        Resident resident = (Resident) masterPersonMap.get(personId);
-        if (biometricId != null) resident.setBiometricId(biometricId);
-        if (lat != FLOAT_EMPTY) resident.setLat(lat);
-        if (lon != FLOAT_EMPTY) resident.setLon(lon);
+        Visitor visitor = (Visitor) masterPersonMap.get(personId);
+        if (biometricId != null) visitor.setBiometricId(biometricId);
+        if (lat != FLOAT_EMPTY) visitor.setLat(lat);
+        if (lon != FLOAT_EMPTY) visitor.setLon(lon);
         System.out.println("Visitor updated");
     }
 

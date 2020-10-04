@@ -104,7 +104,7 @@ create sensor-event city_1:bot_1 type thermometer value 98.6 joe
 # create sensor-output <city_id>[:<device_id>] type (speaker) value <string>
 
 create sensor-output city_1:bot_1 type speaker value "your temperature is normal"
-create sensor-output city_1 speaker value "severe weather alert, please take shelter"
+create sensor-output city_1 type speaker value "severe weather alert, please take shelter"
 
 # Person Commands
 # Define a new Resident

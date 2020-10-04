@@ -145,7 +145,7 @@ public class CommandProcessor {
                     if (cityDevicePair.length == 2) {
                         this.modelService.showDevice(city_id, device_id);
                     } else {
-                        this.modelService.showDevice(city_id);
+                        this.modelService.showDevice(list.get(2));
                     }
                     break;
 
@@ -157,7 +157,7 @@ public class CommandProcessor {
                     if (cityDevicePair.length == 2) {
                         this.modelService.createSensorOutput(city_id, device_id, list.get(4), list.get(6));
                     } else {
-                        this.modelService.createSensorOutput(city_id, list.get(4), list.get(6));
+                        this.modelService.createSensorOutput(list.get(2), list.get(4), list.get(6));
                     }
                     break;
 
