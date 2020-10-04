@@ -242,7 +242,7 @@ public class ModelService {
      */
     public void showDevice(String cityId) {
         Map<String, Device> map = cityMap.get(cityId).getDeviceMap();
-        System.out.println("This is a list of the devices IDs in the city: " + map.keySet());
+        System.out.println("For City ID: " + cityId + " This is a list of the devices IDs in the city: " + map.keySet());
     }
 
     /**
@@ -253,7 +253,7 @@ public class ModelService {
      */
     public void showDevice(String cityId, String deviceId) {
         Device device = cityMap.get(cityId).getDeviceMap().get(deviceId);
-        System.out.println("Device ID: " + device.getDeviceId() + " Lat and Lon: " + device.getLat() + device.getLon()
+        System.out.println("For City ID: " + cityId + "Device ID: " + device.getDeviceId() + " Lat and Lon: " + device.getLat() + device.getLon()
                 + " the class of the Device is: " + device.getClass());
     }
 
@@ -264,8 +264,17 @@ public class ModelService {
         device.setSensorValue(sensorValue);
         device.setSensorSubject(sensorSubject);
     }
-    
 
+    public void createSensorOutput(String cityId, String deviceId, String sensorType, String sensorValue) {
+        Device device = cityMap.get(cityId).getDeviceMap().get(deviceId);
+        device.setSensorType(sensorType);
+        device.setSensorValue(sensorValue);
+        System.out.println("City: " + cityId + " DeviceID: " + deviceId + " SensorType: " + sensorType + " Value: " + sensorValue);
+    }
+
+    public void createSensorOutput(String cityId, String sensorType, String sensorValue) {
+        System.out.println("For all the devices in City: " + cityId + ", output for sensor type: " + sensorType + " Value: " + sensorValue);
+    }
     //Below are Person methods
 
     /**
