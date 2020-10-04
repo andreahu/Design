@@ -95,6 +95,7 @@ public class ModelService {
         StreetSign streetSign = new StreetSign(deviceId, lat, lon, enabled, text);
         City theCity = cityMap.get(cityId);
         theCity.getDeviceMap().put(deviceId, streetSign);
+        System.out.println("Street sign defined");
         return streetSign;
     }
 
@@ -108,6 +109,7 @@ public class ModelService {
     public void updateStreetSign(String cityId, String deviceId, String text) {
         Device streetSign = cityMap.get(cityId).getDeviceMap().get(deviceId);
         ((StreetSign) streetSign).setText(text);
+        System.out.println("Street sign updated");
     }
 
     /**
@@ -125,6 +127,7 @@ public class ModelService {
         Kiosk kiosk = new Kiosk(deviceId, lat, lon, enabled, imageLink);
         City theCity = cityMap.get(cityId);
         theCity.getDeviceMap().put(deviceId, kiosk);
+        System.out.println("kiosk defined");
         return kiosk;
     }
 
@@ -140,6 +143,7 @@ public class ModelService {
         Device kiosk = cityMap.get(cityId).getDeviceMap().get(deviceId);
         if (enabled != null) kiosk.setEnabled(enabled);
         if (imageLink != null) ((Kiosk) kiosk).setImageLink(imageLink);
+        System.out.println("kiosk updated");
     }
 
     /**
@@ -157,6 +161,7 @@ public class ModelService {
         StreetLight streetLight = new StreetLight(deviceId, lat, lon, enabled, brightness);
         City theCity = cityMap.get(cityId);
         theCity.getDeviceMap().put(deviceId, streetLight);
+        System.out.println("street light defined");
         return streetLight;
     }
 
@@ -172,6 +177,7 @@ public class ModelService {
         Device streetLight = cityMap.get(cityId).getDeviceMap().get(deviceId);
         if (enabled != null) ((StreetLight) streetLight).setEnabled(enabled);
         if (brightness != null) ((StreetLight) streetLight).setBrightness(brightness);
+        System.out.println("street light updated");
     }
 
     /**
@@ -189,6 +195,7 @@ public class ModelService {
         ParkingSpace parkingSpace = new ParkingSpace(deviceId, lat, lon, enabled, rate);
         City theCity = cityMap.get(cityId);
         theCity.getDeviceMap().put(deviceId, parkingSpace);
+        System.out.println("parking space defined");
         return parkingSpace;
     }
 
@@ -202,6 +209,7 @@ public class ModelService {
     public void updateParkingSpace(String cityId, String deviceId, String rate) {
         Device parkingSpace = cityMap.get(cityId).getDeviceMap().get(deviceId);
         ((ParkingSpace) parkingSpace).setRate(rate);
+        System.out.println("parking space updated");
     }
 
     /**
@@ -219,6 +227,7 @@ public class ModelService {
         Robot robot = new Robot(deviceId, lat, lon, enabled, activity);
         City theCity = cityMap.get(cityId);
         theCity.getDeviceMap().put(deviceId, robot);
+        System.out.println("robot defined");
         return robot;
     }
 
@@ -227,6 +236,7 @@ public class ModelService {
         if (lat != FLOAT_EMPTY) robot.setLat(lat);
         if (lon != FLOAT_EMPTY) robot.setLon(lon);
         if (activity != null) ((Robot) robot).setActivity(activity);
+        System.out.println("robot updated");
     }
 
     /**
@@ -247,6 +257,7 @@ public class ModelService {
         Vehicle vehicle = new Vehicle(deviceId, lat, lon, enabled, type, activity, capacity, fee);
         City theCity = cityMap.get(cityId);
         theCity.getDeviceMap().put(deviceId, vehicle);
+        System.out.println("vehicle defined");
         return vehicle;
     }
 
@@ -256,6 +267,8 @@ public class ModelService {
         if (lon != FLOAT_EMPTY) vehicle.setLon(lon);
         if (enabled != null) vehicle.setEnabled(enabled);
         if (activity != null) ((Vehicle) vehicle).setActivity(activity);
+        System.out.println("vehicle defined");
+        return;
     }
 
     /**
@@ -265,7 +278,8 @@ public class ModelService {
      */
     public void showDevice(String cityId) {
         Map<String, Device> map = cityMap.get(cityId).getDeviceMap();
-        System.out.println("For City ID: " + cityId + " This is a list of the devices IDs in the city: " + map.keySet());
+        System.out.println("For City ID: " + cityId + " This is a list of the devices IDs in the city: ");
+        System.out.println(map.keySet());
     }
 
     /**
@@ -286,6 +300,7 @@ public class ModelService {
         device.setSensorType(sensorType);
         device.setSensorValue(sensorValue);
         if (sensorSubject != null) device.setSensorSubject(sensorSubject);
+        System.out.println("sensor event created");
     }
 
     public void createSensorOutput(String cityId, String deviceId, String sensorType, String sensorValue) {
@@ -319,6 +334,7 @@ public class ModelService {
         //find the person's city and add him into the city's personMap
         City city = findCity(lat, lon);
         city.getPersonMap().put(personId, resident);
+        System.out.println("Resident defined");
         return resident;
     }
 
@@ -344,6 +360,7 @@ public class ModelService {
         if (lat != FLOAT_EMPTY) resident.setLat(lat);
         if (lon != FLOAT_EMPTY) resident.setLon(lon);
         if (blockChainAccountId != null) resident.setBlockChainAccountId(blockChainAccountId);
+        System.out.println("Resident updated");
     }
 
     /**
@@ -359,6 +376,7 @@ public class ModelService {
         masterPersonMap.put(personId, visitor);
         City city = findCity(lat, lon);
         city.getPersonMap().put(personId, visitor);
+        System.out.println("Visitor defined");
         return visitor;
     }
 
@@ -375,6 +393,7 @@ public class ModelService {
         if (biometricId != null) resident.setBiometricId(biometricId);
         if (lat != FLOAT_EMPTY) resident.setLat(lat);
         if (lon != FLOAT_EMPTY) resident.setLon(lon);
+        System.out.println("Visitor updated");
     }
 
     public void showPerson(String personId) {

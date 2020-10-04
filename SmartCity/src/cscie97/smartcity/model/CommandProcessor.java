@@ -9,10 +9,9 @@ import java.util.regex.Pattern;
 public class CommandProcessor {
 
     public static float FLOAT_EMPTY = Float.MAX_VALUE;
+    ModelService modelService = new ModelService(new HashMap<String, City>(), new HashMap<String, Person>());
 
     public void processCommand(String command) throws CommandProcessorException {
-
-        ModelService modelService = new ModelService(new HashMap<String, City>(), new HashMap<String, Person>());
 
         System.out.println("Processing command " + command);
 
@@ -87,99 +86,99 @@ public class CommandProcessor {
                     if (list.size() < 10) {
                         throw new CommandProcessorException("defineCity", "wrong number of arguments", 0);
                     }
-                    modelService.defineCity(list.get(2), list.get(4), list.get(6), Float.parseFloat(list.get(8)), Float.parseFloat(list.get(10)), Float.parseFloat(list.get(12)));
+                    this.modelService.defineCity(list.get(2), list.get(4), list.get(6), Float.parseFloat(list.get(8)), Float.parseFloat(list.get(10)), Float.parseFloat(list.get(12)));
                     break;
 
                 case "show city":
-                    modelService.showCity(list.get(2));
+                    this.modelService.showCity(list.get(2));
                     break;
 
                 case "define street-sign":
-                    modelService.defineStreetSign(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
+                    this.modelService.defineStreetSign(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
                     break;
 
                 case "update street-sign":
-                    modelService.updateStreetSign(city_id, device_id, list.get(4));
+                    this.modelService.updateStreetSign(city_id, device_id, list.get(4));
                     break;
 
                 case "define info-kiosk":
-                    modelService.defineKiosk(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
+                    this.modelService.defineKiosk(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
                     break;
 
                 case "update info-kiosk":
-                    modelService.updateKiosk(city_id, device_id, enabled, brightness);
+                    this.modelService.updateKiosk(city_id, device_id, enabled, brightness);
                     break;
 
                 case "define street-light":
-                    modelService.defineStreetLight(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
+                    this.modelService.defineStreetLight(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
                     break;
 
                 case "update street-light":
-                    modelService.updateStreetLight(city_id, device_id, enabled, image);
+                    this.modelService.updateStreetLight(city_id, device_id, enabled, image);
                     break;
 
                 case "define parking-space":
-                    modelService.defineParkingSpace(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
+                    this.modelService.defineParkingSpace(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
                     break;
 
                 case "update parking-space":
-                    modelService.updateParkingSpace(city_id, device_id, list.get(4));
+                    this.modelService.updateParkingSpace(city_id, device_id, list.get(4));
                     break;
 
                 case "define robot":
-                    modelService.defineRobot(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
+                    this.modelService.defineRobot(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
                     break;
 
                 case "update robot":
-                    modelService.updateRobot(city_id, device_id, lat, lon, activity);
+                    this.modelService.updateRobot(city_id, device_id, lat, lon, activity);
                     break;
 
                 case "define vehicle":
-                    modelService.defineVehicle(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10), list.get(12), list.get(14), list.get(16));
+                    this.modelService.defineVehicle(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10), list.get(12), list.get(14), list.get(16));
                     break;
 
                 case "update vehicle":
-                    modelService.updateVehicle(city_id, device_id, lat, lon, enabled, activity);
+                    this.modelService.updateVehicle(city_id, device_id, lat, lon, enabled, activity);
                     break;
 
                 case "show device":
                     if (cityDevicePair.length == 2) {
-                        modelService.showDevice(city_id, device_id);
+                        this.modelService.showDevice(city_id, device_id);
                     } else {
-                        modelService.showDevice(city_id);
+                        this.modelService.showDevice(city_id);
                     }
                     break;
 
                 case "create sensor-event":
-                    modelService.createSensorEvent(city_id, device_id, map.get("type"), map.get("value"), map.get("subject"));
+                    this.modelService.createSensorEvent(city_id, device_id, map.get("type"), map.get("value"), map.get("subject"));
                     break;
 
                 case "create sensor-output":
                     if (cityDevicePair.length == 2) {
-                        modelService.createSensorOutput(city_id, device_id, list.get(4), list.get(6));
+                        this.modelService.createSensorOutput(city_id, device_id, list.get(4), list.get(6));
                     } else {
-                        modelService.createSensorOutput(city_id, list.get(4), list.get(6));
+                        this.modelService.createSensorOutput(city_id, list.get(4), list.get(6));
                     }
                     break;
 
                 case "define resident":
-                    modelService.defineResident(list.get(2), name, bio_metric, phone, role, lat, lon, account);
+                    this.modelService.defineResident(list.get(2), name, bio_metric, phone, role, lat, lon, account);
                     break;
 
                 case "update resident":
-                    modelService.updateResident(list.get(2), name, bio_metric, phone, role, lat, lon, account);
+                    this.modelService.updateResident(list.get(2), name, bio_metric, phone, role, lat, lon, account);
                     break;
 
                 case "define visitor":
-                    modelService.defineVisitor(list.get(2), bio_metric, lat, lon);
+                    this.modelService.defineVisitor(list.get(2), bio_metric, lat, lon);
                     break;
 
                 case "update visitor":
-                    modelService.updateVisitor(list.get(2), bio_metric, lat, lon);
+                    this.modelService.updateVisitor(list.get(2), bio_metric, lat, lon);
                     break;
 
                 case "show person":
-                    modelService.showPerson(list.get(2));
+                    this.modelService.showPerson(list.get(2));
                     break;
             }
         } catch (CommandProcessorException e) {
