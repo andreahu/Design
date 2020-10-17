@@ -17,6 +17,8 @@ public class City {
     private Map<String, Person> personMap;
 
     /**
+     * Constructor
+     *
      * @param cityId
      * @param cityName
      * @param blockChainAccount

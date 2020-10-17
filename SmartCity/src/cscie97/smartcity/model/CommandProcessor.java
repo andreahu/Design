@@ -83,7 +83,7 @@ public class CommandProcessor {
 
             switch (theCommand) {
                 case "define city":
-                    if (list.size() < 10) {
+                    if (list.size() != 13) {
                         throw new CommandProcessorException("defineCity", "wrong number of arguments", 0);
                     }
                     this.modelService.defineCity(list.get(2), list.get(4), list.get(6), Float.parseFloat(list.get(8)), Float.parseFloat(list.get(10)), Float.parseFloat(list.get(12)));

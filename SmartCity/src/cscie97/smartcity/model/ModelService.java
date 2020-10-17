@@ -295,6 +295,15 @@ public class ModelService {
     }
 
 
+    /**
+     * add value into the sensor related attributes of a device
+     *
+     * @param cityId
+     * @param deviceId
+     * @param sensorType
+     * @param sensorValue
+     * @param sensorSubject
+     */
     public void createSensorEvent(String cityId, String deviceId, String sensorType, String sensorValue, String sensorSubject) {
         Device device = cityMap.get(cityId).getDeviceMap().get(deviceId);
         device.setSensorType(sensorType);
@@ -303,6 +312,14 @@ public class ModelService {
         System.out.println("sensor event created");
     }
 
+    /**
+     * add value into the sensor related attributes of a device and print out the information
+     *
+     * @param cityId
+     * @param deviceId
+     * @param sensorType
+     * @param sensorValue
+     */
     public void createSensorOutput(String cityId, String deviceId, String sensorType, String sensorValue) {
         Device device = cityMap.get(cityId).getDeviceMap().get(deviceId);
         device.setSensorType(sensorType);
@@ -310,6 +327,13 @@ public class ModelService {
         System.out.println("City: " + cityId + " DeviceID: " + deviceId + " SensorType: " + sensorType + " Value: " + sensorValue);
     }
 
+    /**
+     * print out the information for the sensor message
+     *
+     * @param cityId
+     * @param sensorType
+     * @param sensorValue
+     */
     public void createSensorOutput(String cityId, String sensorType, String sensorValue) {
         System.out.println("For all the devices in City: " + cityId + ", output for sensor type: " + sensorType + " Value: " + sensorValue);
     }
@@ -396,6 +420,11 @@ public class ModelService {
         System.out.println("Visitor updated");
     }
 
+    /**
+     * print out the information for the person
+     *
+     * @param personId
+     */
     public void showPerson(String personId) {
         Person p = masterPersonMap.get(personId);
         System.out.println("Person ID: " + p.getPersonId() + " Bio_Metric: " + p.getBiometricId() + " Lat and Lon: " + p.getLat() + "，" + p.getLon()
