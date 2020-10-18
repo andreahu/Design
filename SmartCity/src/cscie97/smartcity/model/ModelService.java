@@ -295,20 +295,17 @@ public class ModelService {
     }
 
 
-    /**
-     * add value into the sensor related attributes of a device
-     *
-     * @param cityId
-     * @param deviceId
-     * @param sensorType
-     * @param sensorValue
-     * @param sensorSubject
-     */
-    public void createSensorEvent(String cityId, String deviceId, String sensorType, String sensorValue, String sensorSubject) {
+    public void createSensorEvent(String cityId, String deviceId, String type, String value, String subject) {
         Device device = cityMap.get(cityId).getDeviceMap().get(deviceId);
-        device.setSensorType(sensorType);
-        device.setSensorValue(sensorValue);
-        if (sensorSubject != null) device.setSensorSubject(sensorSubject);
+        Sensor sensor = device.getSensorMap().get(type);
+        sensor.setValue(value);
+
+        Event event = new Event(sensor.getType(), sensor.getValue());
+        device.setLatestEvent(event);
+        if (subject != null) {
+            device.getLatestEvent().setSubject(subject);
+        }
+
         System.out.println("sensor event created");
     }
 
@@ -317,14 +314,13 @@ public class ModelService {
      *
      * @param cityId
      * @param deviceId
-     * @param sensorType
-     * @param sensorValue
+     * @param type
+     * @param value
      */
-    public void createSensorOutput(String cityId, String deviceId, String sensorType, String sensorValue) {
+    public void createSensorOutput(String cityId, String deviceId, String type, String value) {
         Device device = cityMap.get(cityId).getDeviceMap().get(deviceId);
-        device.setSensorType(sensorType);
-        device.setSensorValue(sensorValue);
-        System.out.println("City: " + cityId + " DeviceID: " + deviceId + " SensorType: " + sensorType + " Value: " + sensorValue);
+        Event event = device.getLatestEvent();
+        System.out.println("City: " + cityId + " DeviceID: " + deviceId + " SensorType: " + type + " Value: " + value);
     }
 
     /**

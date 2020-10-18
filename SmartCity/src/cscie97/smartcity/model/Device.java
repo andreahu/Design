@@ -1,24 +1,39 @@
 package cscie97.smartcity.model;
 
+import java.util.Map;
+
 public abstract class Device {
 
     private String deviceId;
     private float lat;
     private float lon;
     private String enabled;
-    private String status;
+    private String status; // reday|offline
 
-    private String sensorType;//microphone|camera|thermometer|co2meter
-    private String sensorValue;
-    private String sensorSubject;
+    private Sensor microphone;
+    private Sensor camera;
+    private Sensor thermometer;
+    private Sensor co2meter;
+    private Map<String, Sensor> sensorMap;
 
+    private Event latestEvent;
 
     public Device(String deviceId, float lat, float lon, String enabled) {
         this.deviceId = deviceId;
         this.lat = lat;
         this.lon = lon;
         this.enabled = enabled;
+
+        this.microphone = new Sensor("microphone", "pending");
+        this.camera = new Sensor("camera", "pending");
+        this.thermometer = new Sensor("thermometer", "pending");
+        this.co2meter = new Sensor("co2meter", "pending");
+        sensorMap.put("microphone", microphone);
+        sensorMap.put("camera", camera);
+        sensorMap.put("thermometer", thermometer);
+        sensorMap.put("co2meter", co2meter);
     }
+
 
     //getters and setters
 
@@ -62,28 +77,19 @@ public abstract class Device {
         this.enabled = enabled;
     }
 
-
-    public String getSensorType() {
-        return sensorType;
+    public Map<String, Sensor> getSensorMap() {
+        return sensorMap;
     }
 
-    public void setSensorType(String sensorType) {
-        this.sensorType = sensorType;
+    public void setSensorMap(Map<String, Sensor> sensorMap) {
+        this.sensorMap = sensorMap;
     }
 
-    public String getSensorValue() {
-        return sensorValue;
+    public Event getLatestEvent() {
+        return latestEvent;
     }
 
-    public void setSensorValue(String sensorValue) {
-        this.sensorValue = sensorValue;
-    }
-
-    public String getSensorSubject() {
-        return sensorSubject;
-    }
-
-    public void setSensorSubject(String sensorSubject) {
-        this.sensorSubject = sensorSubject;
+    public void setLatestEvent(Event latestEvent) {
+        this.latestEvent = latestEvent;
     }
 }
