@@ -319,7 +319,7 @@ public class ModelService {
      */
     public void createSensorOutput(String cityId, String deviceId, String type, String value) {
         Device device = cityMap.get(cityId).getDeviceMap().get(deviceId);
-        Event event = device.getLatestEvent();
+//        Event event = device.getLatestEvent();
         System.out.println("City: " + cityId + " DeviceID: " + deviceId + " SensorType: " + type + " Value: " + value);
     }
 

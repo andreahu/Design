@@ -1,5 +1,7 @@
 package cscie97.smartcity.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Device {
@@ -28,6 +30,7 @@ public abstract class Device {
         this.camera = new Sensor("camera", "pending");
         this.thermometer = new Sensor("thermometer", "pending");
         this.co2meter = new Sensor("co2meter", "pending");
+        this.sensorMap = new HashMap<>();
         sensorMap.put("microphone", microphone);
         sensorMap.put("camera", camera);
         sensorMap.put("thermometer", thermometer);
