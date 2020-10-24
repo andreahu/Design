@@ -1,17 +1,50 @@
 package cscie97.smartcity.model;
 
+import cscie97.smartcity.controller.Observer;
+import cscie97.smartcity.controller.Subject;
+
+import java.util.ArrayList;
 import java.util.Map;
 
-public class ModelService {
+public class ModelService implements Subject {
+
+
+    private ArrayList<Observer> observers;
+    private ArrayList<Event> events;
 
     private Map<String, City> cityMap;
     private Map<String, Person> masterPersonMap;
-
     public static float FLOAT_EMPTY = Float.MAX_VALUE;
 
     public ModelService(Map<String, City> cityMap, Map<String, Person> masterPersonMap) {
         this.cityMap = cityMap;
         this.masterPersonMap = masterPersonMap;
+        observers = new ArrayList<>();
+        events = new ArrayList<>();
+    }
+
+    public void addEvent(Event e) {
+        events.add(e);
+        notifyObservers();
+    }
+
+
+    @Override
+    public void attach(Observer o) {
+        observers.add(o);
+    }
+
+    @Override
+    public void detach(Observer o) {
+        observers.remove(o);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer o : observers) {
+            o.update();
+        }
+
     }
 
     /**
@@ -425,5 +458,24 @@ public class ModelService {
         Person p = masterPersonMap.get(personId);
         System.out.println("Person ID: " + p.getPersonId() + " Bio_Metric: " + p.getBiometricId() + " Lat and Lon: " + p.getLat() + "，" + p.getLon()
                 + " the class of the Person is: " + p.getClass());
+    }
+
+
+    //getters and setters
+
+    public ArrayList<Observer> getObservers() {
+        return observers;
+    }
+
+    public void setObservers(ArrayList<Observer> observers) {
+        this.observers = observers;
+    }
+
+    public ArrayList<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(ArrayList<Event> events) {
+        this.events = events;
     }
 }

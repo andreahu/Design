@@ -1,13 +1,18 @@
 package cscie97.smartcity.controller;
 
-//import java.util.ArrayList;
-//import java.util.List;
+import cscie97.smartcity.model.Event;
+
+import java.util.ArrayList;
 
 public interface Subject {
-    public void attach(Observer observer);
 
-    public void detach(Observer observer);
 
-    public void notifyObserver();
+    public void attach(Observer o);
+
+    public void detach(Observer o);
+
+    public void notifyObservers();
+
+    public ArrayList<Event> getEvents();
 
 }
