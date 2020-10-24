@@ -12,6 +12,8 @@ public class City {
     private float lon;
     private float radius;
 
+    private String announcement;
+
     //association
     private Map<String, Device> deviceMap;
     private Map<String, Person> personMap;
@@ -40,6 +42,14 @@ public class City {
 
 
     /* getters and setters */
+
+    public String getAnnouncement() {
+        return announcement;
+    }
+
+    public void setAnnouncement(String announcement) {
+        this.announcement = announcement;
+    }
 
     public String getCityId() {
         return cityId;

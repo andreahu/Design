@@ -1,8 +1,6 @@
 package cscie97.smartcity.controller;
 
-public abstract class Command {
+public interface Command {
 
-    public void execute() {
-        
-    }
+    public void execute();
 }

@@ -24,7 +24,10 @@ public class ControllerService implements Observer {
     }
 
     public Command createCommand(Event e) {
-        
+        //@TODO
+
+        return
+
     }
 
 
