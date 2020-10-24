@@ -1,5 +1,7 @@
 package cscie97.smartcity.model;
 
+import cscie97.smartcity.controller.ControllerService;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -9,7 +11,25 @@ import java.util.regex.Pattern;
 public class CommandProcessor {
 
     public static float FLOAT_EMPTY = Float.MAX_VALUE;
-    ModelService modelService = new ModelService(new HashMap<String, City>(), new HashMap<String, Person>());
+    ModelService modelService;
+    ControllerService controller;
+
+    public CommandProcessor() {
+        this.modelService = new ModelService(new HashMap<String, City>(), new HashMap<String, Person>());
+        this.controller = new ControllerService(modelService);
+    }
+
+    private List<String> stripQuotes(List<String> in) {
+        List<String> out = new ArrayList<>();
+        for (String s : in) {
+            if (s.startsWith("\"") && s.endsWith("\"")) {
+                out.add(s.substring(1, s.length() - 1));
+            } else {
+                out.add(s);
+            }
+        }
+        return out;
+    }
 
     public void processCommand(String command) throws CommandProcessorException {
 
@@ -20,6 +40,7 @@ public class CommandProcessor {
         while (m.find()) {// Add .replace("\"", "") to remove surrounding quotes.
             list.add(m.group(1));
         }
+        list = this.stripQuotes(list);
 
         String theCommand = list.get(0) + " " + list.get(1);
         String[] cityDevicePair = list.get(2).split(":");

@@ -20,7 +20,8 @@ public class ControllerService implements Observer {
     }
 
     public void checkEvent(ArrayList<Event> events) {
-        //@TODO
+        Command c = createCommand(events.get(events.size() - 1));
+        c.execute();
     }
 
 
@@ -35,8 +36,6 @@ public class ControllerService implements Observer {
             case "traffic_accident":
                 command = new EmergencyCmd(event);
                 return command;
-
-
         }
 
         return null;

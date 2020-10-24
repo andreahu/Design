@@ -339,8 +339,9 @@ public class ModelService implements Subject {
         if (subject != null) {
             device.getLatestEvent().setSubject(subject);
         }
-
         System.out.println("sensor event created");
+        // Notify observer.
+        this.addEvent(event);
     }
 
     /**

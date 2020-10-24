@@ -26,8 +26,10 @@ public class EmergencyCmd implements Command {
     public void execute() {
         if (emergency_type.equals("traffic_accident")) {
             emergency2_execute();
+            System.out.println("Action taken for emergency 2");
         } else {
             emergency1_execute();
+            System.out.println("Action taken for emergency 1");
         }
     }
 
@@ -37,10 +39,10 @@ public class EmergencyCmd implements Command {
 
         ArrayList<Robot> robots = getAllRobots();
         int robotCount = robots.size();
-        for (int i = 0; i <= robotCount / 2; i++) {
+        for (int i = 0; i < robotCount / 2; i++) {
             robots.get(i).setActivity("address " + emergency_type + " at lat " + lat + "long" + lon);
         }
-        for (int i = (robotCount / 2) + 1; i < robotCount; i++) {
+        for (int i = (robotCount / 2); i < robotCount; i++) {
             robots.get(i).setActivity("Help people find shelter");
         }
     }
@@ -81,8 +83,10 @@ public class EmergencyCmd implements Command {
             float distance = distance(event, r);
             if (distance > closeDistance0) {
                 nearest2Robots[0] = r;
+                closeDistance0 = distance;
             } else if (distance > closeDistance1) {
                 nearest2Robots[1] = r;
+                closeDistance1 = distance;
             }
         }
         return nearest2Robots;

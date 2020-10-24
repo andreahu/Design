@@ -14,5 +14,6 @@ public class Robot extends Device {
 
     public void setActivity(String activity) {
         this.activity = activity;
+        System.out.println(activity);
     }
 }
