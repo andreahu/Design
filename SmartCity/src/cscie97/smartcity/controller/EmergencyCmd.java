@@ -10,16 +10,28 @@ public class EmergencyCmd implements Command {
     String emergency_type; //emergency_type
     private float lat;
     private float lon;
+    Event event;
 
     public EmergencyCmd(City city, Event event, float lat, float lon) {
         this.city = city;
         this.emergency_type = event.getValue();
         this.lat = lat;
         this.lon = lon;
+        this.event = event;
     }
 
     @Override
     public void execute() {
+        if (emergency_type == "traffic_accident") {
+            emergency2_execute();
+        } else {
+            emergency1_execute();
+        }
+
+    }
+
+
+    public void emergency1_execute() {
         city.setAnnouncement("There is a " + emergency_type + " in " + city.getCityId() + ", please find shelter immediately");
 
         Map<String, Device> deviceMap = city.getDeviceMap();
@@ -37,6 +49,13 @@ public class EmergencyCmd implements Command {
         for (int i = (robotCount / 2) + 1; i < robotCount; i++) {
             robots.get(i).setActivity("Help people find shelter");
         }
-
     }
+
+    public void emergency2_execute() {
+
+
+        //TODO: add code
+        System.out.println("pending implementing emergency2");
+    }
+
 }

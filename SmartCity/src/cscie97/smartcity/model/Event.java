@@ -4,14 +4,21 @@ public class Event {
     private String type;
     private String value;
     private String subject;
+    private Sensor sensor;
+
+    private City city;
+    private Device device;
+    private float lat;
+    private float lon;
 
 
-    public Event(String type, String value) {
+    public Event(String type, String value, Sensor sensor) {
         this.type = type;
         this.value = value;
         this.subject = "no subject info";
+        this.sensor = sensor;
     }
-    
+
 
     //getters and setters
 
@@ -38,4 +45,6 @@ public class Event {
     public void setSubject(String subject) {
         this.subject = subject;
     }
+
+
 }

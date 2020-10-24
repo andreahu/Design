@@ -4,8 +4,8 @@ public class StreetLight extends Device {
 
     private String brightness;
 
-    public StreetLight(String deviceId, float lat, float lon, String enabled, String brightness) {
-        super(deviceId, lat, lon, enabled);
+    public StreetLight(City city, String deviceId, float lat, float lon, String enabled, String brightness) {
+        super(city, deviceId, lat, lon, enabled);
         this.brightness = brightness;
     }
 

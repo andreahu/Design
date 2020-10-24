@@ -125,8 +125,8 @@ public class ModelService implements Subject {
      * @return
      */
     public StreetSign defineStreetSign(String cityId, String deviceId, float lat, float lon, String enabled, String text) {
-        StreetSign streetSign = new StreetSign(deviceId, lat, lon, enabled, text);
         City theCity = cityMap.get(cityId);
+        StreetSign streetSign = new StreetSign(theCity, deviceId, lat, lon, enabled, text);
         theCity.getDeviceMap().put(deviceId, streetSign);
         System.out.println("Street sign defined");
         return streetSign;
@@ -157,8 +157,8 @@ public class ModelService implements Subject {
      * @return the kiosk object created
      */
     public Kiosk defineKiosk(String cityId, String deviceId, float lat, float lon, String enabled, String imageLink) {
-        Kiosk kiosk = new Kiosk(deviceId, lat, lon, enabled, imageLink);
         City theCity = cityMap.get(cityId);
+        Kiosk kiosk = new Kiosk(theCity, deviceId, lat, lon, enabled, imageLink);
         theCity.getDeviceMap().put(deviceId, kiosk);
         System.out.println("kiosk defined");
         return kiosk;
@@ -191,8 +191,8 @@ public class ModelService implements Subject {
      * @return the street light object created
      */
     public StreetLight defineStreetLight(String cityId, String deviceId, float lat, float lon, String enabled, String brightness) {
-        StreetLight streetLight = new StreetLight(deviceId, lat, lon, enabled, brightness);
         City theCity = cityMap.get(cityId);
+        StreetLight streetLight = new StreetLight(theCity, deviceId, lat, lon, enabled, brightness);
         theCity.getDeviceMap().put(deviceId, streetLight);
         System.out.println("street light defined");
         return streetLight;
@@ -225,8 +225,8 @@ public class ModelService implements Subject {
      * @return the created object
      */
     public ParkingSpace defineParkingSpace(String cityId, String deviceId, float lat, float lon, String enabled, String rate) {
-        ParkingSpace parkingSpace = new ParkingSpace(deviceId, lat, lon, enabled, rate);
         City theCity = cityMap.get(cityId);
+        ParkingSpace parkingSpace = new ParkingSpace(theCity, deviceId, lat, lon, enabled, rate);
         theCity.getDeviceMap().put(deviceId, parkingSpace);
         System.out.println("parking space defined");
         return parkingSpace;
@@ -257,8 +257,8 @@ public class ModelService implements Subject {
      * @return robot
      */
     public Robot defineRobot(String cityId, String deviceId, float lat, float lon, String enabled, String activity) {
-        Robot robot = new Robot(deviceId, lat, lon, enabled, activity);
         City theCity = cityMap.get(cityId);
+        Robot robot = new Robot(theCity, deviceId, lat, lon, enabled, activity);
         theCity.getDeviceMap().put(deviceId, robot);
         System.out.println("robot defined");
         return robot;
@@ -287,8 +287,8 @@ public class ModelService implements Subject {
      * @return vehicle object
      */
     public Vehicle defineVehicle(String cityId, String deviceId, float lat, float lon, String enabled, String type, String activity, String capacity, String fee) {
-        Vehicle vehicle = new Vehicle(deviceId, lat, lon, enabled, type, activity, capacity, fee);
         City theCity = cityMap.get(cityId);
+        Vehicle vehicle = new Vehicle(theCity, deviceId, lat, lon, enabled, type, activity, capacity, fee);
         theCity.getDeviceMap().put(deviceId, vehicle);
         System.out.println("vehicle defined");
         return vehicle;
@@ -329,11 +329,12 @@ public class ModelService implements Subject {
 
 
     public void createSensorEvent(String cityId, String deviceId, String type, String value, String subject) {
-        Device device = cityMap.get(cityId).getDeviceMap().get(deviceId);
+        City city = cityMap.get(cityId);
+        Device device = city.getDeviceMap().get(deviceId);
         Sensor sensor = device.getSensorMap().get(type);
         sensor.setValue(value);
 
-        Event event = new Event(sensor.getType(), sensor.getValue());
+        Event event = new Event(type, value, sensor);
         device.setLatestEvent(event);
         if (subject != null) {
             device.getLatestEvent().setSubject(subject);

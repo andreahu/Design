@@ -23,10 +23,23 @@ public class ControllerService implements Observer {
         //@TODO
     }
 
-    public Command createCommand(Event e) {
-        //@TODO
 
-        return
+    public Command createCommand(Event e) {
+        Command c;
+
+        switch (e.getValue()) {
+            case "fire":
+            case "flood":
+            case "earthquake":
+            case "severe weather":
+            case "traffic_accident":
+//                c = new EmergencyCmd()
+                break;
+
+
+        }
+
+        return c;
 
     }
 

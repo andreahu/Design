@@ -6,6 +6,7 @@ import java.util.Map;
 
 public abstract class Device {
 
+    private City city;
     private String deviceId;
     private float lat;
     private float lon;
@@ -18,18 +19,20 @@ public abstract class Device {
     private Sensor co2meter;
     private Map<String, Sensor> sensorMap;
 
+
     private Event latestEvent;
 
-    public Device(String deviceId, float lat, float lon, String enabled) {
+    public Device(City city, String deviceId, float lat, float lon, String enabled) {
+        this.city = city;
         this.deviceId = deviceId;
         this.lat = lat;
         this.lon = lon;
         this.enabled = enabled;
 
-        this.microphone = new Sensor("microphone", "pending");
-        this.camera = new Sensor("camera", "pending");
-        this.thermometer = new Sensor("thermometer", "pending");
-        this.co2meter = new Sensor("co2meter", "pending");
+        this.microphone = new Sensor("microphone", "pending", city, this);
+        this.camera = new Sensor("camera", "pending", city, this);
+        this.thermometer = new Sensor("thermometer", "pending", city, this);
+        this.co2meter = new Sensor("co2meter", "pending", city, this);
         this.sensorMap = new HashMap<>();
         sensorMap.put("microphone", microphone);
         sensorMap.put("camera", camera);
@@ -39,6 +42,15 @@ public abstract class Device {
 
 
     //getters and setters
+
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
 
     public String getDeviceId() {
         return deviceId;
