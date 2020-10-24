@@ -15,8 +15,13 @@ public class Event {
     public Event(String type, String value, Sensor sensor) {
         this.type = type;
         this.value = value;
-        this.subject = "no subject info";
         this.sensor = sensor;
+
+        this.subject = "no subject info";
+        city = sensor.getCity();
+        device = sensor.getDevice();
+        lat = sensor.getLat();
+        lon = sensor.getLon();
     }
 
 
@@ -46,5 +51,43 @@ public class Event {
         this.subject = subject;
     }
 
+    public Sensor getSensor() {
+        return sensor;
+    }
 
+    public void setSensor(Sensor sensor) {
+        this.sensor = sensor;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public Device getDevice() {
+        return device;
+    }
+
+    public void setDevice(Device device) {
+        this.device = device;
+    }
+
+    public float getLat() {
+        return lat;
+    }
+
+    public void setLat(float lat) {
+        this.lat = lat;
+    }
+
+    public float getLon() {
+        return lon;
+    }
+
+    public void setLon(float lon) {
+        this.lon = lon;
+    }
 }

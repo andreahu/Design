@@ -12,6 +12,7 @@ public abstract class Device {
     private float lon;
     private String enabled;
     private String status; // reday|offline
+    private String announcement;
 
     private Sensor microphone;
     private Sensor camera;
@@ -29,10 +30,10 @@ public abstract class Device {
         this.lon = lon;
         this.enabled = enabled;
 
-        this.microphone = new Sensor("microphone", "pending", city, this);
-        this.camera = new Sensor("camera", "pending", city, this);
-        this.thermometer = new Sensor("thermometer", "pending", city, this);
-        this.co2meter = new Sensor("co2meter", "pending", city, this);
+        this.microphone = new Sensor("microphone", "pending", this);
+        this.camera = new Sensor("camera", "pending", this);
+        this.thermometer = new Sensor("thermometer", "pending", this);
+        this.co2meter = new Sensor("co2meter", "pending", this);
         this.sensorMap = new HashMap<>();
         sensorMap.put("microphone", microphone);
         sensorMap.put("camera", camera);
@@ -42,8 +43,6 @@ public abstract class Device {
 
 
     //getters and setters
-
-
     public City getCity() {
         return city;
     }
@@ -90,6 +89,14 @@ public abstract class Device {
 
     public void setEnabled(String enabled) {
         this.enabled = enabled;
+    }
+
+    public String getAnnouncement() {
+        return announcement;
+    }
+
+    public void setAnnouncement(String announcement) {
+        this.announcement = announcement;
     }
 
     public Map<String, Sensor> getSensorMap() {

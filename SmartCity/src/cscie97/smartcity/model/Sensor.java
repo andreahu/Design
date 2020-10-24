@@ -9,10 +9,10 @@ public class Sensor {
     private float lat;
     private float lon;
 
-    public Sensor(String type, String value, City city, Device device) {
+    public Sensor(String type, String value, Device device) {
         this.type = type;
         this.value = value;
-        this.city = city;
+        this.city = device.getCity();
         this.device = device;
         this.lat = device.getLat();
         this.lon = device.getLon();
