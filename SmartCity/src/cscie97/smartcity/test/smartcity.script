@@ -173,9 +173,9 @@ create sensor-event city_1:bus_1 type microphone value "Does this bus go to cent
 create sensor-event city_1:bus_1 type camera value "Person boards bus" subject resident_1
 create sensor-event city_1:bus_1 type camera value "Person boards bus" subject resident_2
 create sensor-event city_1:bus_1 type camera value "Person boards bus" subject visitor_1
-#
-## Trigger Rule Movie Info
-#create sensor-event city_1:kiosk_2 type microphone value "what movies are showing tonight?" subject resident_1
-#
-## Trigger Rule Movie Reservation
-#create sensor-event city_1:kiosk_2 type microphone value "reserve 3 seats for the 9 pm showing of Casablanca." subject resident_1
+
+# Trigger Rule Movie Info
+create sensor-event city_1:kiosk_2 type microphone value "what movies are showing tonight?" subject resident_1
+
+# Trigger Rule Movie Reservation
+create sensor-event city_1:kiosk_2 type microphone value "reserve 3 seats for the 9 pm showing of Casablanca." subject resident_1

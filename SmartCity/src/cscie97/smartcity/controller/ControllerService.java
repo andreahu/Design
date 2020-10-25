@@ -57,6 +57,12 @@ public class ControllerService implements Observer {
             case "Person boards bus":
                 command = new BoardBusCmd(event);
                 break;
+            case "what movies are showing tonight?":
+                command = new MovieInfoCmd(event);
+                break;
+            case "reserve 3 seats for the 9 pm showing of Casablanca.":
+                command = new MovieReservationCmd(event);
+                break;
 
 
         }
