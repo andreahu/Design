@@ -151,6 +151,7 @@ create sensor-event city_1:sl_2 type camera value "traffic_accident"
 #create sensor-event city_1:sl_2 type co2meter value "800"
 #create sensor-event city_1:bot_1 type co2meter value "700"
 #
+
 ## Trigger Rule Litter Event
 #create sensor-event city_1:bot_1 type camera value "littering" subject resident_1
 #

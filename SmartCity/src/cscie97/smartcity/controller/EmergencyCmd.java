@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class EmergencyCmd implements Command {
+
+    private Event event;
     private City city;
     private Device device;
-    private String emergency_type; //emergency_type
+    private String emergency_type;
     private float lat;
     private float lon;
-    private Event event;
 
     public EmergencyCmd(Event event) {
         this.event = event;

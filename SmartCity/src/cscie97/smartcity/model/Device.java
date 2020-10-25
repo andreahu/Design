@@ -18,6 +18,7 @@ public abstract class Device {
     private Sensor camera;
     private Sensor thermometer;
     private Sensor co2meter;
+    private Sensor speaker;
     private Map<String, Sensor> sensorMap;
 
 
@@ -34,11 +35,13 @@ public abstract class Device {
         this.camera = new Sensor("camera", "pending", this);
         this.thermometer = new Sensor("thermometer", "pending", this);
         this.co2meter = new Sensor("co2meter", "pending", this);
+        this.speaker = new Sensor("speaker", "pending", this);
         this.sensorMap = new HashMap<>();
         sensorMap.put("microphone", microphone);
         sensorMap.put("camera", camera);
         sensorMap.put("thermometer", thermometer);
         sensorMap.put("co2meter", co2meter);
+        sensorMap.put("speaker", speaker);
     }
 
 
@@ -113,5 +116,45 @@ public abstract class Device {
 
     public void setLatestEvent(Event latestEvent) {
         this.latestEvent = latestEvent;
+    }
+
+    public Sensor getMicrophone() {
+        return microphone;
+    }
+
+    public void setMicrophone(Sensor microphone) {
+        this.microphone = microphone;
+    }
+
+    public Sensor getCamera() {
+        return camera;
+    }
+
+    public void setCamera(Sensor camera) {
+        this.camera = camera;
+    }
+
+    public Sensor getThermometer() {
+        return thermometer;
+    }
+
+    public void setThermometer(Sensor thermometer) {
+        this.thermometer = thermometer;
+    }
+
+    public Sensor getCo2meter() {
+        return co2meter;
+    }
+
+    public void setCo2meter(Sensor co2meter) {
+        this.co2meter = co2meter;
+    }
+
+    public Sensor getSpeaker() {
+        return speaker;
+    }
+
+    public void setSpeaker(Sensor speaker) {
+        this.speaker = speaker;
     }
 }

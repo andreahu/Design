@@ -36,6 +36,8 @@ public class ControllerService implements Observer {
             case "traffic_accident":
                 command = new EmergencyCmd(event);
                 return command;
+
+            case "littering":
         }
 
         return null;
