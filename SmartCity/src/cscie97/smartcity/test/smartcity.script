@@ -90,8 +90,8 @@ show device city_1
 # Simulate a device sensor event
 #create sensor-event <city_id>[:<device_id>] type (microphone|camera|thermometer|co2meter) value <string> [subject <person_id>]
 
-#create sensor-event city_1:bus_1 type microphone value "does this bus go to Central Square?" subject resident_1
-#create sensor-event city_1:bus_1 type camera value "person boarding bus" subject resident_1
+#create sensor-event city_1:bus_1 type microphone value "Does this bus go to Central Square?" subject resident_1
+#create sensor-event city_1:bus_1 type camera value "Person boards bus" subject resident_1
 #create sensor-event city_1:sl_1 type thermometer value 80
 #create sensor-event city_1:sl_1 type co2meter value 500
 #create sensor-event city_1:bot_1 type thermometer value 98.6 subject resident_2

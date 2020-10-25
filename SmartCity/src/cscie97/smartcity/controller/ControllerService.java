@@ -36,6 +36,10 @@ public class ControllerService implements Observer {
             case "traffic_accident":
                 command = new EmergencyCmd(event);
                 break;
+            case "CO2 level over 1000":
+            case "CO2 level under 1000":
+                command = new CO2Cmd(event);
+                break;
             case "littering":
                 command = new LittlerCmd(event);
                 break;
