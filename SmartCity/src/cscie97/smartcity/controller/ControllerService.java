@@ -54,6 +54,9 @@ public class ControllerService implements Observer {
             case "Does this bus go to central square?":
                 command = new BusRouteCmd(event);
                 break;
+            case "Person boards bus":
+                command = new BoardBusCmd(event);
+                break;
 
 
         }

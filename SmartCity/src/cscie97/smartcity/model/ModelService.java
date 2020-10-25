@@ -286,7 +286,7 @@ public class ModelService implements Subject {
      * @param fee
      * @return vehicle object
      */
-    public Vehicle defineVehicle(String cityId, String deviceId, float lat, float lon, String enabled, String type, String activity, String capacity, String fee) {
+    public Vehicle defineVehicle(String cityId, String deviceId, float lat, float lon, String enabled, String type, String activity, String capacity, int fee) {
         City theCity = cityMap.get(cityId);
         Vehicle vehicle = new Vehicle(theCity, deviceId, lat, lon, enabled, type, activity, capacity, fee);
         theCity.getDeviceMap().put(deviceId, vehicle);

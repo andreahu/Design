@@ -155,7 +155,7 @@ public class CommandProcessor {
                     break;
 
                 case "define vehicle":
-                    this.modelService.defineVehicle(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10), list.get(12), list.get(14), list.get(16));
+                    this.modelService.defineVehicle(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10), list.get(12), list.get(14), Integer.parseInt(list.get(16)));
                     break;
 
                 case "update vehicle":

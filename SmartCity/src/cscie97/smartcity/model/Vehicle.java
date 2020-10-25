@@ -4,9 +4,9 @@ public class Vehicle extends Device {
     private String type;
     private String activity;
     private String capacity;
-    private String fee;
+    private int fee;
 
-    public Vehicle(City city, String deviceId, float lat, float lon, String enabled, String type, String activity, String capacity, String fee) {
+    public Vehicle(City city, String deviceId, float lat, float lon, String enabled, String type, String activity, String capacity, int fee) {
         super(city, deviceId, lat, lon, enabled);
         this.type = type;
         this.activity = activity;
@@ -38,11 +38,11 @@ public class Vehicle extends Device {
         this.capacity = capacity;
     }
 
-    public String getFee() {
+    public int getFee() {
         return fee;
     }
 
-    public void setFee(String fee) {
+    public void setFee(int fee) {
         this.fee = fee;
     }
 }

@@ -168,11 +168,11 @@ create sensor-event city_1:ps_1 type camera value "Vehicle parked for 1 hour." s
 
 # Trigger Rule Bus Route
 create sensor-event city_1:bus_1 type microphone value "Does this bus go to central square?" subject resident_1
-#
-## Trigger Rule Board Bus
-#create sensor-event city_1:bus_1 type camera value "Person boards bus" subject resident_1
-#create sensor-event city_1:bus_1 type camera value "Person boards bus" subject resident_2
-#create sensor-event city_1:bus_1 type camera value "Person boards bus" subject visitor_1
+
+# Trigger Rule Board Bus
+create sensor-event city_1:bus_1 type camera value "Person boards bus" subject resident_1
+create sensor-event city_1:bus_1 type camera value "Person boards bus" subject resident_2
+create sensor-event city_1:bus_1 type camera value "Person boards bus" subject visitor_1
 #
 ## Trigger Rule Movie Info
 #create sensor-event city_1:kiosk_2 type microphone value "what movies are showing tonight?" subject resident_1
