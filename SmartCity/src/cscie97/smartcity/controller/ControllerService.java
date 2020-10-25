@@ -48,6 +48,13 @@ public class ControllerService implements Observer {
             case "can you help me find my child":
                 command = new MissingChild(event);
                 break;
+            case "Vehicle parked for 1 hour.":
+                command = new ParkingCmd(event);
+                break;
+            case "Does this bus go to central square?":
+                command = new BusRouteCmd(event);
+                break;
+
 
         }
 

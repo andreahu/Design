@@ -224,7 +224,7 @@ public class ModelService implements Subject {
      * @param rate
      * @return the created object
      */
-    public ParkingSpace defineParkingSpace(String cityId, String deviceId, float lat, float lon, String enabled, String rate) {
+    public ParkingSpace defineParkingSpace(String cityId, String deviceId, float lat, float lon, String enabled, int rate) {
         City theCity = cityMap.get(cityId);
         ParkingSpace parkingSpace = new ParkingSpace(theCity, deviceId, lat, lon, enabled, rate);
         theCity.getDeviceMap().put(deviceId, parkingSpace);
@@ -239,7 +239,7 @@ public class ModelService implements Subject {
      * @param deviceId
      * @param rate
      */
-    public void updateParkingSpace(String cityId, String deviceId, String rate) {
+    public void updateParkingSpace(String cityId, String deviceId, int rate) {
         Device parkingSpace = cityMap.get(cityId).getDeviceMap().get(deviceId);
         ((ParkingSpace) parkingSpace).setRate(rate);
         System.out.println("parking space updated");

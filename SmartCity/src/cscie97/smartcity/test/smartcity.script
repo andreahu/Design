@@ -162,12 +162,12 @@ create sensor-event city_1:bot_2 type camera value "person_seen" subject residen
 
 # Trigger Rule Missing Child
 create sensor-event city_1:bot_1 type microphone value "can you help me find my child" subject resident_1
-#
-## Trigger Rule Parking Event
-#create sensor-event city_1:ps_1 type camera value "Vehicle city_1:car_1 parked for 1 hour."
-#
-## Trigger Rule Bus Route
-#create sensor-event city_1:bus_1 type microphone value "Does this bus go to central square?" subject resident_1
+
+# Trigger Rule Parking Event
+create sensor-event city_1:ps_1 type camera value "Vehicle parked for 1 hour." subject city_1:car_1
+
+# Trigger Rule Bus Route
+create sensor-event city_1:bus_1 type microphone value "Does this bus go to central square?" subject resident_1
 #
 ## Trigger Rule Board Bus
 #create sensor-event city_1:bus_1 type camera value "Person boards bus" subject resident_1

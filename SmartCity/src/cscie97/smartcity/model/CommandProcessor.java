@@ -139,11 +139,11 @@ public class CommandProcessor {
                     break;
 
                 case "define parking-space":
-                    this.modelService.defineParkingSpace(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
+                    this.modelService.defineParkingSpace(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), Integer.parseInt(list.get(10)));
                     break;
 
                 case "update parking-space":
-                    this.modelService.updateParkingSpace(city_id, device_id, list.get(4));
+                    this.modelService.updateParkingSpace(city_id, device_id, Integer.parseInt(list.get(4)));
                     break;
 
                 case "define robot":
