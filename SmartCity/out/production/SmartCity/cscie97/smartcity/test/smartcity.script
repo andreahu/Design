@@ -160,8 +160,8 @@ create sensor-event city_1:kiosk_1 type microphone value "broken_glass_sound"
 # Trigger Rule Person Seen
 create sensor-event city_1:bot_2 type camera value "person_seen" subject resident_1
 
-## Trigger Rule Missing Child
-#create sensor-event city_1:bot_1 type microphone value "can you help me find my child resident_2" subject resident_1
+# Trigger Rule Missing Child
+create sensor-event city_1:bot_1 type microphone value "can you help me find my child" subject resident_1
 #
 ## Trigger Rule Parking Event
 #create sensor-event city_1:ps_1 type camera value "Vehicle city_1:car_1 parked for 1 hour."

@@ -45,6 +45,9 @@ public class ControllerService implements Observer {
             case "person_seen":
                 command = new PersonSeenCmd(event);
                 break;
+            case "can you help me find my child":
+                command = new MissingChild(event);
+                break;
 
         }
 
