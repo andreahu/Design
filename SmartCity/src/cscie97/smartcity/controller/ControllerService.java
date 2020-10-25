@@ -26,7 +26,7 @@ public class ControllerService implements Observer {
 
 
     public Command createCommand(Event event) {
-        Command command;
+        Command command = null;
 
         switch (event.getValue()) {
             case "fire":
@@ -35,12 +35,20 @@ public class ControllerService implements Observer {
             case "severe weather":
             case "traffic_accident":
                 command = new EmergencyCmd(event);
-                return command;
-
+                break;
             case "littering":
+                command = new LittlerCmd(event);
+                break;
+            case "broken_glass_sound":
+                command = new BrokenGlassCmd(event);
+                break;
+            case "person_seen":
+                command = new PersonSeenCmd(event);
+                break;
+
         }
 
-        return null;
+        return command;
 
     }
 
