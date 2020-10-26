@@ -11,11 +11,12 @@ public class ControllerService implements Observer {
     private int co2okCount;
     private Ledger ledger;
 
-    public ControllerService(Subject subject) {
+    public ControllerService(Subject subject, Ledger l) {
         this.subject = subject;
         this.subject.attach(this);
         this.co2highCount = 0;
         this.co2okCount = 0;
+        this.ledger = l;
     }
 
     @Override
@@ -61,7 +62,7 @@ public class ControllerService implements Observer {
                     command = new EmergencyCmd(event);
                     break;
                 case "littering":
-                    command = new LittlerCmd(event);
+                    command = new LittlerCmd(event, ledger);
                     break;
                 case "broken_glass_sound":
                     command = new BrokenGlassCmd(event);
@@ -73,19 +74,19 @@ public class ControllerService implements Observer {
                     command = new MissingChild(event);
                     break;
                 case "Vehicle parked for 1 hour.":
-                    command = new ParkingCmd(event);
+                    command = new ParkingCmd(event, ledger);
                     break;
                 case "Does this bus go to central square?":
                     command = new BusRouteCmd(event);
                     break;
                 case "Person boards bus":
-                    command = new BoardBusCmd(event);
+                    command = new BoardBusCmd(event, ledger);
                     break;
                 case "what movies are showing tonight?":
                     command = new MovieInfoCmd(event);
                     break;
                 case "reserve 3 seats for the 9 pm showing of Casablanca.":
-                    command = new MovieReservationCmd(event);
+                    command = new MovieReservationCmd(event, ledger);
                     break;
             }
         }

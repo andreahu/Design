@@ -16,7 +16,7 @@ public class Ledger {
     //AH added
     private Block currentBlock;
 
-    public Ledger(String name, String description, String seed){
+    public Ledger(String name, String description, String seed) {
         this.name = name;
         this.description = description;
         this.seed = seed;
@@ -34,7 +34,7 @@ public class Ledger {
         this.currentBlock = new Block(this.getNextBlockNumber(), null, accountMap);
     }
 
-    public String createAccount(String accountId){
+    public String createAccount(String accountId) {
         Account newAccount = new Account(accountId);
         this.currentBlock.accountBalanceMap.put(accountId, newAccount);
         return newAccount.address;
@@ -77,16 +77,16 @@ public class Ledger {
         return transaction.transactionId;
     }
 
-    public int getAccountBalance(String address) throws LedgerException{
+    public int getAccountBalance(String address) throws LedgerException {
         // Return the account for the Account with a given address
-        if(currentBlock.previousBlock != null && currentBlock.previousBlock.accountBalanceMap.containsKey(address)){
+        if (currentBlock.previousBlock != null && currentBlock.previousBlock.accountBalanceMap.containsKey(address)) {
             return currentBlock.previousBlock.accountBalanceMap.get(address).balance;
-        }else{
+        } else {
             throw new LedgerException("getAccountBalance", "address doesn't exist");
         }
     }
 
-    public Map<String, Integer> getAccountBalances(){
+    public Map<String, Integer> getAccountBalances() {
         Map<String, Integer> balances = new HashMap<>();
         if (this.currentBlock.previousBlock == null) {
             return balances;
@@ -97,9 +97,9 @@ public class Ledger {
         return balances;
     }
 
-    public Transaction getTransaction(String transactionId){
+    public Transaction getTransaction(String transactionId) {
         //Return the Transaction for the given transaction id.
-        for (Map.Entry<Integer, Block> entry: this.blockMap.entrySet()) {
+        for (Map.Entry<Integer, Block> entry : this.blockMap.entrySet()) {
             Block b = entry.getValue();
             for (Transaction t : b.transactionList) {
                 if (t.transactionId.equals(transactionId)) {
@@ -162,11 +162,9 @@ public class Ledger {
         return this.blockMap.size() + 1;
     }
 
-    private Account getMasterAccount() {
+    public Account getMasterAccount() {
         return this.currentBlock.accountBalanceMap.get("master");
     }
-
-
 
 
 }

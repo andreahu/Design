@@ -1,5 +1,6 @@
 package cscie97.smartcity.model;
 
+import com.cscie97.ledger.Ledger;
 import cscie97.smartcity.controller.Observer;
 import cscie97.smartcity.controller.Subject;
 
@@ -15,12 +16,14 @@ public class ModelService implements Subject {
     private Map<String, City> cityMap;
     private Map<String, Person> masterPersonMap;
     public static float FLOAT_EMPTY = Float.MAX_VALUE;
+    private Ledger ledger;
 
-    public ModelService(Map<String, City> cityMap, Map<String, Person> masterPersonMap) {
+    public ModelService(Map<String, City> cityMap, Map<String, Person> masterPersonMap, Ledger l) {
         this.cityMap = cityMap;
         this.masterPersonMap = masterPersonMap;
         observers = new ArrayList<>();
         events = new ArrayList<>();
+        this.ledger = l;
     }
 
     public void addEvent(Event e) {
@@ -286,9 +289,9 @@ public class ModelService implements Subject {
      * @param fee
      * @return vehicle object
      */
-    public Vehicle defineVehicle(String cityId, String deviceId, float lat, float lon, String enabled, String type, String activity, String capacity, int fee) {
+    public Vehicle defineVehicle(String cityId, String deviceId, float lat, float lon, String enabled, String type, String activity, String capacity, int fee, Ledger ledger) {
         City theCity = cityMap.get(cityId);
-        Vehicle vehicle = new Vehicle(theCity, deviceId, lat, lon, enabled, type, activity, capacity, fee);
+        Vehicle vehicle = new Vehicle(theCity, deviceId, lat, lon, enabled, type, activity, capacity, fee, ledger);
         theCity.getDeviceMap().put(deviceId, vehicle);
         System.out.println("vehicle defined");
         return vehicle;
@@ -384,7 +387,7 @@ public class ModelService implements Subject {
      * @return the resident object created
      */
     public Resident defineResident(String personId, String name, String biometricId, String phoneNumber, String role, float lat, float lon, String blockChainAccountId) {
-        Resident resident = new Resident(personId, name, biometricId, phoneNumber, role, lat, lon, blockChainAccountId);
+        Resident resident = new Resident(personId, name, biometricId, phoneNumber, role, lat, lon, blockChainAccountId, ledger);
         masterPersonMap.put(personId, resident);
         //find the person's city and add him into the city's personMap
         City city = findCity(lat, lon);

@@ -1,5 +1,6 @@
 package cscie97.smartcity.model;
 
+import com.cscie97.ledger.Ledger;
 import cscie97.smartcity.controller.ControllerService;
 
 import java.io.File;
@@ -13,10 +14,12 @@ public class CommandProcessor {
     public static float FLOAT_EMPTY = Float.MAX_VALUE;
     ModelService modelService;
     ControllerService controller;
+    private Ledger ledger;
 
     public CommandProcessor() {
-        this.modelService = new ModelService(new HashMap<String, City>(), new HashMap<String, Person>());
-        this.controller = new ControllerService(modelService);
+        this.ledger = new Ledger("ControllerLedger", "the ledger used for controllerService", "AH");
+        this.modelService = new ModelService(new HashMap<String, City>(), new HashMap<String, Person>(), this.ledger);
+        this.controller = new ControllerService(modelService, this.ledger);
     }
 
     private List<String> stripQuotes(List<String> in) {
@@ -155,7 +158,7 @@ public class CommandProcessor {
                     break;
 
                 case "define vehicle":
-                    this.modelService.defineVehicle(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10), list.get(12), list.get(14), Integer.parseInt(list.get(16)));
+                    this.modelService.defineVehicle(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10), list.get(12), list.get(14), Integer.parseInt(list.get(16)), ledger);
                     break;
 
                 case "update vehicle":

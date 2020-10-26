@@ -1,19 +1,24 @@
 package cscie97.smartcity.model;
 
+import com.cscie97.ledger.*;
+
 public class Resident extends Person {
 
     private String name;
     private String phoneNumber;
     private String role;
     private String blockChainAccountId;
+    private Ledger ledger;
 
     public Resident(String personId, String name, String biometricId, String phoneNumber,
-                    String role, float lat, float lon, String blockChainAccountId) {
+                    String role, float lat, float lon, String blockChainAccountId, Ledger l) {
         super(personId, biometricId, lat, lon);
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.role = role;
         this.blockChainAccountId = blockChainAccountId;
+        this.ledger = l;
+        ledger.createAccount(blockChainAccountId);
     }
 
 

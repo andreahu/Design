@@ -16,13 +16,14 @@ public class LittlerCmd implements Command {
 
     private Ledger ledger;
 
-    public LittlerCmd(Event event) {
+    public LittlerCmd(Event event, Ledger l) {
         this.event = event;
         this.city = event.getCity();
         this.device = event.getDevice();
         this.person_id = event.getSubject();
         this.lat = event.getLat();
         this.lon = event.getLon();
+        this.ledger = l;
     }
 
     @Override
@@ -34,7 +35,6 @@ public class LittlerCmd implements Command {
 
         Person person = city.getPersonMap().get(person_id);
         charge(50, person_id);
-        System.out.println("The person is charged for littering.");
     }
 
 
@@ -50,12 +50,19 @@ public class LittlerCmd implements Command {
 
 
     public void charge(int amount, String person_id) {
-        Account payer = ledger.getAccount(person_id);
+        Resident resident = (Resident) city.getPersonMap().get(person_id);
+        String resident_account = resident.getBlockChainAccountId();
+        Account payer = ledger.getAccount(resident_account);
         Account receiver_master = ledger.getMasterAccount();
-        String transaction_id = "litterCharge_1";
+        String transaction_id = "litterCharge_" + person_id;
         Transaction transaction = new Transaction(transaction_id, amount, 0, "Litter Charge", payer, receiver_master);
-        String transactionId = ledger.processTransaction(transaction);
-        System.out.println("transaction processed for transactionID: " + transactionId);
+        try {
+            ledger.processTransaction(transaction);
+            System.out.println("This person is charged for littering");
+        } catch (LedgerException e) {
+            System.out.println("This person doesn't have enough balance");
+        }
+        System.out.println("transaction processed for transactionID: " + transaction_id);
     }
 
 }

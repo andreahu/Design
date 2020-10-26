@@ -8,17 +8,19 @@ public class ParkingCmd implements Command {
     private Event event;
     private City city;
     private String city_device;
+    private Ledger ledger;
 
-    public ParkingCmd(Event event) {
+    public ParkingCmd(Event event, Ledger l) {
         this.event = event;
         this.city = event.getCity();
         this.city_device = event.getSubject();
+        this.ledger = l;
     }
 
     @Override
     public void execute() {
-        Device vehicle = getVehicle();
-        charge(50, vehicle.getDeviceId());
+        Vehicle vehicle = (Vehicle) getVehicle();
+        charge(50, vehicle);
         System.out.println("Vehicle " + vehicle.getDeviceId() + " was charged for 1 hour");
 
     }
@@ -31,13 +33,19 @@ public class ParkingCmd implements Command {
     }
 
     //@TODO: Charge the vehicle account for parking for 1 hour.
-    public void charge(int amount, String vehicle_id) {
-//        Account payer = ledger.getAccount(vehicle_id);
-//        Account receiver_master = ledger.getMasterAccount();
-//        String transaction_id = "litterCharge_1";
-//        Transaction transaction = new Transaction(transaction_id, amount, 0, "Parking Charge", payer, receiver_master);
-//        String transactionId = ledger.processTransaction(transaction);
-//        System.out.println("transaction processed for transactionID: " + transactionId);
-    }
+    public void charge(int amount, Vehicle vehicle) {
 
+        String vehicle_account = vehicle.getBlockChainAccountId();
+        Account payer = ledger.getAccount(vehicle_account);
+        Account receiver_master = ledger.getMasterAccount();
+        String transaction_id = "ParkingRate_" + vehicle.getDeviceId();
+        Transaction transaction = new Transaction(transaction_id, amount, 0, "Parking Charge", payer, receiver_master);
+        try {
+            ledger.processTransaction(transaction);
+            System.out.println("This vehicle is charged for littering");
+        } catch (LedgerException e) {
+            System.out.println("This vehicle doesn't have enough balance");
+        }
+        System.out.println("transaction processed for transactionID: " + transaction_id);
+    }
 }
