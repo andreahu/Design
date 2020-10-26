@@ -4,7 +4,13 @@ import cscie97.smartcity.model.*;
 
 import java.util.Map;
 
-public class MissingChild implements Command {
+/**
+ * The following actions taken for this cmd
+ * locate person <person_id>
+ * speaker: “person <person_id> is at lat <lat> long <long>, a robot is retrieving now, stay where you are."
+ * Robot: “retrieve person <person_id> and bring to lat <lat> long <long> of microphone.
+ */
+public class MissingChildCmd implements Command {
 
     private Event event;
     private City city;
@@ -13,7 +19,7 @@ public class MissingChild implements Command {
     private float lat;
     private float lon;
 
-    public MissingChild(Event event) {
+    public MissingChildCmd(Event event) {
         this.event = event;
         this.city = event.getCity();
         this.device = event.getDevice();
@@ -23,6 +29,11 @@ public class MissingChild implements Command {
     }
 
     @Override
+    /**
+     * locate person
+     * speaker: “person <person_id> is at lat <lat> long <long>, a robot is retrieving now, stay where you are."
+     * Robot: “retrieve person <person_id> and bring to lat <lat> long <long> of microphone.
+     */
     public void execute() {
 
         Person person = city.getPersonMap().get(person_id);
@@ -38,6 +49,9 @@ public class MissingChild implements Command {
                 + " long " + person.getLon() + ", a robot is retrieving now, stay where you are.");
     }
 
+    /**
+     * @return a robot in the city
+     */
     public Robot getOneRobot() {
         Map<String, Device> deviceMap = city.getDeviceMap();
         for (Device d : deviceMap.values()) {

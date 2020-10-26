@@ -6,6 +6,11 @@ import com.cscie97.ledger.LedgerException;
 import com.cscie97.ledger.Transaction;
 import cscie97.smartcity.model.*;
 
+/**
+ * When someone has board the bus
+ * Bus Speaker: “hello, good to see you <person_id>”
+ * If the person is a resident and has a positive account balance, charge persons account for the rate of the bus.
+ */
 public class BoardBusCmd implements Command {
 
     private Event event;
@@ -22,6 +27,10 @@ public class BoardBusCmd implements Command {
         this.ledger = l;
     }
 
+    /**
+     * Bus Speaker: “hello, good to see you <person_id>”
+     * If the person is a resident and has a positive account balance, charge persons account for the rate of the bus.
+     */
     @Override
     public void execute() {
 
@@ -38,6 +47,10 @@ public class BoardBusCmd implements Command {
     }
 
 
+    /**
+     * @param amount:the amount to be charged
+     * @param person_id: the person to be charged
+     */
     public void charge(int amount, String person_id) {
         Resident resident = (Resident) city.getPersonMap().get(person_id);
         String resident_account = resident.getBlockChainAccountId();

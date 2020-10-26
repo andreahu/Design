@@ -4,6 +4,10 @@ import cscie97.smartcity.model.*;
 
 import java.util.Map;
 
+/**
+ * The following actions are going to be taken when this cmd is called
+ * update the robot to : "clean up broken glass at a location
+ */
 public class BrokenGlassCmd implements Command {
     private Event event;
     private City city;
@@ -21,6 +25,9 @@ public class BrokenGlassCmd implements Command {
     }
 
     @Override
+    /**
+     * update the robot to : "clean up broken glass at a location"
+     */
     public void execute() {
         Robot robot = getOneRobot();
         robot.setActivity("clean up broken glass at lat " + lat + ", long " + lon);
@@ -28,6 +35,9 @@ public class BrokenGlassCmd implements Command {
     }
 
 
+    /**
+     * @return A robot to do the work
+     */
     public Robot getOneRobot() {
         Map<String, Device> deviceMap = city.getDeviceMap();
         for (Device d : deviceMap.values()) {

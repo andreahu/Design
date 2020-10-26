@@ -5,6 +5,9 @@ import cscie97.smartcity.model.Device;
 import cscie97.smartcity.model.Event;
 import cscie97.smartcity.model.Person;
 
+/**
+ * This cmd update person location to a new location
+ */
 public class PersonSeenCmd implements Command {
 
     private Event event;
@@ -25,6 +28,9 @@ public class PersonSeenCmd implements Command {
 
 
     @Override
+    /**
+     * Update person location to a new location
+     */
     public void execute() {
         Person person = city.getPersonMap().get(person_id);
         person.setLat(lat);

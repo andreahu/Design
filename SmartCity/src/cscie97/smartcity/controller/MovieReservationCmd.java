@@ -6,6 +6,13 @@ import com.cscie97.ledger.LedgerException;
 import com.cscie97.ledger.Transaction;
 import cscie97.smartcity.model.*;
 
+/**
+ * The following actions are going to be taken when this cmd is called
+ * 1.Lookup Person
+ * 2. Check for positive account balance
+ * 3. If the person is a resident and has a positive account balance, charge the person 10 units
+ * 4. Speaker: “your seats are reserved; please arrive a few minutes early.”
+ */
 public class MovieReservationCmd implements Command {
 
     private Event event;
@@ -23,6 +30,12 @@ public class MovieReservationCmd implements Command {
     }
 
     @Override
+    /**
+     *  Lookup Person
+     *  Check for positive account  balance
+     *  If the person is a resident and has a positive account balance, charge the person 10 units
+     *  Speaker: “your seats are reserved; please arrive a few minutes early.”
+     */
     public void execute() {
         Person p = city.getPersonMap().get(person_id);
         if (p instanceof Resident) {
@@ -30,6 +43,9 @@ public class MovieReservationCmd implements Command {
         }
         charge(10, person_id);
 
+        kiosk.getSpeaker().setValue("your seats are reserved; please arrive a few minutes early");
+
+        System.out.println("movie reservation is done");
     }
 
 

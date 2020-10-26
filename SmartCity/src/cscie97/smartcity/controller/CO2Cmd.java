@@ -5,6 +5,13 @@ import cscie97.smartcity.model.*;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * This cmd does the following:
+ * If high CO2 level(>=1000) reported by more than 3 devices within a city, this cmd will be triggered:
+ * Then: Disable all cars in the city.
+ * If normal CO2 level(<1000) reported by more than 3 devices within a city, this cmd will be triggered:
+ * Then: Enable all cars in the city.
+ */
 public class CO2Cmd implements Command {
 
 
@@ -20,6 +27,12 @@ public class CO2Cmd implements Command {
     }
 
     @Override
+    /**
+     * If high CO2 level(>=1000) reported by more than 3 devices within a city, this method will be triggered:
+     * Then: Disable all cars in the city.
+     * If normal CO2 level(<1000) reported by more than 3 devices within a city, this method will be triggered:
+     *  Then: Enable all cars in the city.
+     */
     public void execute() {
         if (co2level >= 1000) {
 
@@ -29,6 +42,9 @@ public class CO2Cmd implements Command {
         }
     }
 
+    /**
+     * Disable all cars in the city
+     */
     public void co2high() {
         //Disable all cars in the city
         this.cars = getAllCars();
@@ -36,6 +52,9 @@ public class CO2Cmd implements Command {
         System.out.println("All cars in the city disabled");
     }
 
+    /**
+     * Enable all cars in the city
+     */
     public void co2ok() {
         //Enable all cars in the city
         this.cars = getAllCars();
@@ -43,6 +62,9 @@ public class CO2Cmd implements Command {
         System.out.println("All cars in the city enabled");
     }
 
+    /**
+     * @return all the cars in the city
+     */
     public ArrayList<Vehicle> getAllCars() {
         Map<String, Device> deviceMap = city.getDeviceMap();
         ArrayList<Vehicle> cars = new ArrayList<>();

@@ -1,11 +1,14 @@
 package cscie97.smartcity.controller;
 
 import com.cscie97.ledger.Ledger;
-import cscie97.smartcity.model.CommandProcessorException;
 import cscie97.smartcity.model.Event;
 
 import java.util.ArrayList;
 
+/**
+ * This class is responsible for monitoring the devices and people within the city, as well as generating actions to control the devices based on rules, in response to status updates from the devices.
+ * This class also connects with the ledger service for financial purpose
+ */
 public class ControllerService implements Observer {
     private Subject subject;
     private int co2highCount;
@@ -20,12 +23,21 @@ public class ControllerService implements Observer {
         this.ledger = l;
     }
 
+    /**
+     * monitors subject and update itself according to the events happen in subject
+     */
     @Override
     public void update() {
         checkEvent(subject.getEvents());
         System.out.println("ControllerService updated.");
     }
 
+    /**
+     * Check the event list in this class and call create command method
+     *
+     * @param events: events list in this class
+     *                Catch ControllerServiceException
+     */
     public void checkEvent(ArrayList<Event> events) {
         try {
             Command c = createCommand(events.get(events.size() - 1));
@@ -38,6 +50,13 @@ public class ControllerService implements Observer {
     }
 
 
+    /**
+     * Create the command that process the execution of the next step
+     *
+     * @param event: event triggered by the sensor
+     * @throws ControllerServiceException
+     * @return: the command that process the execution of the next step
+     */
     public Command createCommand(Event event) throws ControllerServiceException {
         Command command = null;
 
@@ -75,7 +94,7 @@ public class ControllerService implements Observer {
                     command = new EmergencyCmd(event);
                     break;
                 case "littering":
-                    command = new LittlerCmd(event, ledger);
+                    command = new LitterCmd(event, ledger);
                     break;
                 case "broken_glass_sound":
                     command = new BrokenGlassCmd(event);
@@ -84,7 +103,7 @@ public class ControllerService implements Observer {
                     command = new PersonSeenCmd(event);
                     break;
                 case "can you help me find my child":
-                    command = new MissingChild(event);
+                    command = new MissingChildCmd(event);
                     break;
                 case "Vehicle parked for 1 hour.":
                     command = new ParkingCmd(event, ledger);

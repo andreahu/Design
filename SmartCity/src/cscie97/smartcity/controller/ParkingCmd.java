@@ -3,6 +3,9 @@ package cscie97.smartcity.controller;
 import cscie97.smartcity.model.*;
 import com.cscie97.ledger.*;
 
+/**
+ * Charge the vehicle account for parking hours
+ */
 public class ParkingCmd implements Command {
 
     private Event event;
@@ -18,6 +21,9 @@ public class ParkingCmd implements Command {
     }
 
     @Override
+    /**
+     * Charge the vehicle account for parking for 1 hour.
+     */
     public void execute() {
         Vehicle vehicle = (Vehicle) getVehicle();
         charge(50, vehicle);
@@ -32,7 +38,12 @@ public class ParkingCmd implements Command {
         return d;
     }
 
-    //@TODO: Charge the vehicle account for parking for 1 hour.
+    /**
+     * Charge the vehicle account for parking.
+     *
+     * @param amount:  rate to be charged
+     * @param vehicle: the vehicle to be charged by
+     */
     public void charge(int amount, Vehicle vehicle) {
 
         String vehicle_account = vehicle.getBlockChainAccountId();

@@ -5,7 +5,13 @@ import cscie97.smartcity.model.*;
 
 import java.util.Map;
 
-public class LittlerCmd implements Command {
+/**
+ * The following actions are going to be taken when this cmd is called
+ * Speaker: “Plese do not litter”
+ * Robot: "clean garbage at lat <lat> long <long>"
+ * Charge person 50 units for littering.
+ */
+public class LitterCmd implements Command {
 
     private Event event;
     private City city;
@@ -16,7 +22,7 @@ public class LittlerCmd implements Command {
 
     private Ledger ledger;
 
-    public LittlerCmd(Event event, Ledger l) {
+    public LitterCmd(Event event, Ledger l) {
         this.event = event;
         this.city = event.getCity();
         this.device = event.getDevice();
@@ -27,6 +33,12 @@ public class LittlerCmd implements Command {
     }
 
     @Override
+    /**
+     * The following action will be take when this method is called
+     * Speaker: “Plese do not litter”
+     * Robot: "clean garbage at lat <lat> long <long>"
+     * Charge person 50 units for littering.
+     */
     public void execute() {
         device.getSpeaker().setValue("Please do not litter");
         Robot robot = getOneRobot();
@@ -38,6 +50,9 @@ public class LittlerCmd implements Command {
     }
 
 
+    /**
+     * @return: a robot
+     */
     public Robot getOneRobot() {
         Map<String, Device> deviceMap = city.getDeviceMap();
         for (Device d : deviceMap.values()) {

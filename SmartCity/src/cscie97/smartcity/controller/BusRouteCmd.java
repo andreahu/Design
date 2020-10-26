@@ -4,6 +4,9 @@ import cscie97.smartcity.model.Device;
 import cscie97.smartcity.model.Event;
 import cscie97.smartcity.model.Vehicle;
 
+/**
+ * The Cmd does: Bus speaker: “Yes, this bus goes to Central Square.”
+ */
 public class BusRouteCmd implements Command {
     private Vehicle bus;
 

@@ -33,16 +33,29 @@ public class ModelService implements Subject {
 
 
     @Override
+    /**
+     * Attach an observer object to the subject
+     *
+     * @param o: the observer object
+     */
     public void attach(Observer o) {
         observers.add(o);
     }
 
     @Override
+    /**
+     * Detach an observer object to the subject
+     *
+     * @param o: the observer object
+     */
     public void detach(Observer o) {
         observers.remove(o);
     }
 
     @Override
+    /**
+     * Notify all the observers attached
+     */
     public void notifyObservers() {
         for (Observer o : observers) {
             o.update();
@@ -476,6 +489,11 @@ public class ModelService implements Subject {
         this.observers = observers;
     }
 
+    /**
+     * Get the list of the events
+     *
+     * @return the list of the events
+     */
     public ArrayList<Event> getEvents() {
         return events;
     }
