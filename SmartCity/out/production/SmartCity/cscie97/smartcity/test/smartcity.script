@@ -140,16 +140,16 @@ create sensor-event city_1:sl_1 type camera value "fire"
 
 # Trigger Rule Emergency 2
 create sensor-event city_1:sl_2 type camera value "traffic_accident"
-#
-## Trigger Rule CO2 Event 1
-#create sensor-event city_1:sl_1 type co2meter value "1200"
-#create sensor-event city_1:sl_2 type co2meter value "1300"
-#create sensor-event city_1:ps_1 type co2meter value "1400"
-#
-## Trigger Rule CO2 Event 2
-#create sensor-event city_1:sl_1 type co2meter value "900"
-#create sensor-event city_1:sl_2 type co2meter value "800"
-#create sensor-event city_1:bot_1 type co2meter value "700"
+
+# Trigger Rule CO2 Event 1
+create sensor-event city_1:sl_1 type co2meter value "1200"
+create sensor-event city_1:sl_2 type co2meter value "1300"
+create sensor-event city_1:ps_1 type co2meter value "1400"
+
+# Trigger Rule CO2 Event 2
+create sensor-event city_1:sl_1 type co2meter value "900"
+create sensor-event city_1:sl_2 type co2meter value "800"
+create sensor-event city_1:bot_1 type co2meter value "700"
 
 # Trigger Rule Litter Event
 create sensor-event city_1:bot_1 type camera value "littering" subject resident_1

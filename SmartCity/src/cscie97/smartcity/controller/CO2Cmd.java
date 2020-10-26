@@ -10,40 +10,37 @@ public class CO2Cmd implements Command {
 
     private Event event;
     private City city;
-    private String co2level;
+    private int co2level;
     private ArrayList<Vehicle> cars;
 
     public CO2Cmd(Event event) {
         this.event = event;
         this.city = event.getCity();
-        this.co2level = event.getValue();
+        this.co2level = Integer.parseInt(event.getValue());
     }
 
     @Override
     public void execute() {
-        if (co2level.equals("CO2 level over 1000")) {
+        if (co2level >= 1000) {
+
             co2high();
-        } else if (co2level.equals("CO2 level under 1000")) {
+        } else if (co2level >= 1000) {
             co2ok();
         }
     }
 
     public void co2high() {
-        //TODO: If reported by more than 3 devices within a city,
-
-
         //Disable all cars in the city
         this.cars = getAllCars();
         disableAllCars(cars);
+        System.out.println("All cars in the city disabled");
     }
 
     public void co2ok() {
-        //TODO: If reported by more than 3 devices within a city,
-
-
         //Enable all cars in the city
         this.cars = getAllCars();
         enableAllCars(cars);
+        System.out.println("All cars in the city enabled");
     }
 
     public ArrayList<Vehicle> getAllCars() {
