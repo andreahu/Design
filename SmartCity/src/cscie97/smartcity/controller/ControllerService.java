@@ -1,5 +1,6 @@
 package cscie97.smartcity.controller;
 
+import com.cscie97.ledger.Ledger;
 import cscie97.smartcity.model.Event;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ public class ControllerService implements Observer {
     private Subject subject;
     private int co2highCount;
     private int co2okCount;
+    private Ledger ledger;
 
     public ControllerService(Subject subject) {
         this.subject = subject;

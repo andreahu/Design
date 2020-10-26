@@ -3,8 +3,6 @@ package cscie97.smartcity.controller;
 import com.cscie97.ledger.*;
 import cscie97.smartcity.model.*;
 
-
-import java.util.ArrayList;
 import java.util.Map;
 
 public class LittlerCmd implements Command {
@@ -15,6 +13,8 @@ public class LittlerCmd implements Command {
     private String person_id;
     private float lat;
     private float lon;
+
+    private Ledger ledger;
 
     public LittlerCmd(Event event) {
         this.event = event;
@@ -48,14 +48,14 @@ public class LittlerCmd implements Command {
         return null;
     }
 
-    //"in the case of littering, the fine for littering should be transferred from the resident's account to the city's account."
+
     public void charge(int amount, String person_id) {
-//        Account payer = ledger.getAccount(person_id);
-//        Account receiver_master = ledger.getMasterAccount();
-//        String transaction_id = "litterCharge_1";
-//        Transaction transaction = new Transaction(transaction_id, amount, 0, "Litter Charge", payer, receiver_master);
-//        String transactionId = ledger.processTransaction(transaction);
-//        System.out.println("transaction processed for transactionID: " + transactionId);
+        Account payer = ledger.getAccount(person_id);
+        Account receiver_master = ledger.getMasterAccount();
+        String transaction_id = "litterCharge_1";
+        Transaction transaction = new Transaction(transaction_id, amount, 0, "Litter Charge", payer, receiver_master);
+        String transactionId = ledger.processTransaction(transaction);
+        System.out.println("transaction processed for transactionID: " + transactionId);
     }
 
 }
