@@ -1,0 +1,62 @@
+# Additional script for the Smart City Model Service.
+#
+# City Commands
+# Define a city
+# define city <city_id> name <name> account <address> lat <float> long <float> radius <float>
+
+define city test_city_1 name Seattle-WA account rain_rain_go_away lat 100.1001 long -20.20 radius 200
+
+# show city <city_id>
+show city test_city_1
+
+# Below command should throw exception since some parameters are missing
+define city fail_city_1
+
+# Device Commands
+# Define a street sign
+# define street-sign <city_id>:<device_id> lat <float> long <float> enabled (true|false) text <text>
+
+define street-sign test_city_1:ss_1 lat 21 long -22 enabled true text "Welcome to Seattle"
+
+# update a street sign
+# update street-sign <city_id>:<device_id> [enabled (true|false)] [text <text>]
+
+update street-sign test_city_1:ss_1 text "It's raining in Seattle now"
+
+## Below command should throw exception since the device doesn't exist
+#update street-sign test_city_1:ss_1 text "Exception here" text "extra parameter"
+
+# Define a robot
+# define robot <city_id>:<device_id> lat <float> long <float> enabled (true|false) activity <string>
+
+define robot test_city_1:bot_1 lat 55.3745 long -21.100 enabled true activity "cooking"
+
+# Update a robot
+# update robot <city_id>:<device_id> [lat <float> long <float>] [enabled (true|false)] [activity <string>]
+
+update robot test_city_1:bot_1 activity "repair houses"
+
+# Show the details of a device; if device id is omitted, show details for all devices within the city
+# show device <city_id>[:<device_id>]
+
+show device test_city_1:bot_1
+
+# Send a device output
+# create sensor-output <city_id>[:<device_id>] type (speaker) value <string>
+
+create sensor-output test_city_1:bot_1 type speaker value "Time to go home"
+
+# Person Commands
+# Define a new Resident
+# define resident <person_id> name <name> bio-metric <string> phone <phone_number> role (adult|child|administrator) lat <lat> long <long> account <account_address>
+
+define resident resident_seattle1 name Kate bio-metric "voice-print='voiceprint-kate',face-print='faceprint-kate'" phone 425-123-1234 role adult lat 100.11 long -20.33 account kate_account
+
+# Update a Resident
+# update resident <person_id> [name <name>] [bio-metric <string>] [phone <phone_number>] [role (adult|child|administrator)] [lat <lat> long <long>] [account <account_address>]
+
+update resident resident_seattle1 name Kate lat 99.11 long -21.99
+
+# Show the details of the person
+# show person <person_id>
+show person resident_seattle1

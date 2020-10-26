@@ -59,8 +59,8 @@ public class CommandProcessor {
         map.put("bio-metric", null);
         map.put("phone", null);
         map.put("role", null);
-        map.put("lat", null);//@TODO this should be float?
-        map.put("long", null);//@TODO this should be float?
+        map.put("lat", null);
+        map.put("long", null);
         map.put("account", null);
         map.put("enabled", null);
         map.put("image", null);

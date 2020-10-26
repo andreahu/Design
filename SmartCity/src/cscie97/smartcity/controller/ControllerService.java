@@ -1,6 +1,7 @@
 package cscie97.smartcity.controller;
 
 import com.cscie97.ledger.Ledger;
+import cscie97.smartcity.model.CommandProcessorException;
 import cscie97.smartcity.model.Event;
 
 import java.util.ArrayList;
@@ -26,14 +27,18 @@ public class ControllerService implements Observer {
     }
 
     public void checkEvent(ArrayList<Event> events) {
-        Command c = createCommand(events.get(events.size() - 1));
-        if (c != null) {
-            c.execute();
+        try {
+            Command c = createCommand(events.get(events.size() - 1));
+            if (c != null) {
+                c.execute();
+            }
+        } catch (ControllerServiceException e) {
+            System.out.println(e.getMessage());
         }
     }
 
 
-    public Command createCommand(Event event) {
+    public Command createCommand(Event event) throws ControllerServiceException {
         Command command = null;
 
         if (event.getType().equals("co2meter")) {
@@ -53,6 +58,9 @@ public class ControllerService implements Observer {
                 }
             }
         } else {
+            if (event.getValue().equals("")) {
+                throw new ControllerServiceException("Event Value Exception", "no value for event");
+            }
             switch (event.getValue()) {
                 case "fire":
                 case "flood":

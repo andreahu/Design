@@ -2,11 +2,11 @@ package cscie97.smartcity.controller;
 
 import java.util.Formatter;
 
-public class CommandException extends Throwable {
+public class ControllerServiceException extends Throwable {
     String action;
     String reason;
 
-    public CommandException(String a, String r) {
+    public ControllerServiceException(String a, String r) {
         this.action = a;
         this.reason = r;
     }
