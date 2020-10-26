@@ -23,9 +23,6 @@ define street-sign test_city_1:ss_1 lat 21 long -22 enabled true text "Welcome t
 
 update street-sign test_city_1:ss_1 text "It's raining in Seattle now"
 
-## Below command should throw exception since the device doesn't exist
-#update street-sign test_city_1:ss_1 text "Exception here" text "extra parameter"
-
 # Define a robot
 # define robot <city_id>:<device_id> lat <float> long <float> enabled (true|false) activity <string>
 
@@ -60,3 +57,40 @@ update resident resident_seattle1 name Kate lat 99.11 long -21.99
 # Show the details of the person
 # show person <person_id>
 show person resident_seattle1
+
+# Define a vehicle
+#define vehicle <city_id>:<device_id> lat <float> long <float> enabled (true|false) type (bus|car) activity <string> capacity <int> fee <int>
+
+define vehicle test_city_1:car_5 lat 33.1111 long -20.300 enabled true type car activity "parked" capacity 4 fee 20
+define vehicle test_city_1:bus_4 lat 40.22 long -22.33 enabled true type bus activity "on route" capacity 20 fee 1
+
+# Trigger Rule Board Bus
+create sensor-event test_city_1:bus_4 type camera value "Person boards bus" subject resident_seattle1
+
+# Below command should throw exception since sensor value is missing
+create sensor-event test_city_1:bus_4 type camera value " " subject resident_seattle1
+
+# Define a robot
+#define robot <city_id>:<device_id> lat <float> long <float> enabled (true|false) activity <string>
+define robot test_city_1:bot_1 lat 33.55 long -21.11 enabled true activity "charging"
+
+# Trigger Rule Broken Glass
+create sensor-event test_city_1:bot_1 type microphone value "broken_glass_sound"
+
+# Trigger Rule CO2 Event 1
+create sensor-event test_city_1:bot_1 type co2meter value "1200"
+create sensor-event test_city_1:car_5 type co2meter value "1400"
+create sensor-event test_city_1:bot_1 type co2meter value "800"
+
+#below command should trigger all cars in the city disabled
+create sensor-event test_city_1:bus_4 type co2meter value "1100"
+create sensor-event test_city_1:bot_1 type co2meter value "600"
+
+#below command should trigger all cars in the city enabled
+create sensor-event test_city_1:car_5 type co2meter value "500"
+
+# Below command should throw exception since sensor gives impossible value
+create sensor-event test_city_1:car_5 type co2meter value "80"
+
+# Below command should throw exception since sensor gives impossible value
+create sensor-event test_city_1:bot_1 type co2meter value "10001"

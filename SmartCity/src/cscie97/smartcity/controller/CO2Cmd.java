@@ -24,7 +24,7 @@ public class CO2Cmd implements Command {
         if (co2level >= 1000) {
 
             co2high();
-        } else if (co2level >= 1000) {
+        } else if (co2level < 1000) {
             co2ok();
         }
     }

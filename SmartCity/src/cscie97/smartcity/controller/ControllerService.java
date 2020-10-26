@@ -43,6 +43,11 @@ public class ControllerService implements Observer {
 
         if (event.getType().equals("co2meter")) {
             int co2level = Integer.parseInt(event.getValue());
+
+            if (co2level >= 10000 || co2level <= 100) {
+                throw new ControllerServiceException("co2meter broken", "impossible value");
+            }
+
             if (co2level >= 1000) {
                 this.co2highCount++;
                 if (co2highCount == 3) {//If reported by more than 3 devices
@@ -58,8 +63,8 @@ public class ControllerService implements Observer {
                 }
             }
         } else {
-            if (event.getValue().equals("")) {
-                throw new ControllerServiceException("Event Value Exception", "no value for event");
+            if (event.getValue().equals(" ")) {
+                throw new ControllerServiceException("Event Value issue", "no value for event");
             }
             switch (event.getValue()) {
                 case "fire":
