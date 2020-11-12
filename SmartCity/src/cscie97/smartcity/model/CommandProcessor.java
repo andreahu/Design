@@ -1,6 +1,7 @@
 package cscie97.smartcity.model;
 
 import com.cscie97.ledger.Ledger;
+import cscie97.smartcity.authentication.AuthenticationService;
 import cscie97.smartcity.controller.ControllerService;
 
 import java.io.File;
@@ -14,12 +15,14 @@ public class CommandProcessor {
     public static float FLOAT_EMPTY = Float.MAX_VALUE;
     ModelService modelService;
     ControllerService controller;
+    AuthenticationService authenticationService;
     private Ledger ledger;
 
     public CommandProcessor() {
         this.ledger = new Ledger("ControllerLedger", "the ledger used for controllerService", "AH");
         this.modelService = new ModelService(new HashMap<String, City>(), new HashMap<String, Person>(), this.ledger);
         this.controller = new ControllerService(modelService, this.ledger);
+        this.authenticationService = new AuthenticationService();
     }
 
     private List<String> stripQuotes(List<String> in) {
@@ -46,6 +49,7 @@ public class CommandProcessor {
         list = this.stripQuotes(list);
 
         String theCommand = list.get(0) + " " + list.get(1);
+        String authenticationCommand = list.get(0);
         String[] cityDevicePair = list.get(2).split(":");
         String city_id = null;
         String device_id = null;
@@ -204,6 +208,17 @@ public class CommandProcessor {
                 case "show person":
                     this.modelService.showPerson(list.get(2));
                     break;
+            }
+
+            switch (authenticationCommand) {
+                case "define_permission":
+                    this.authenticationService.definePermission(list.get(1), list.get(2), list.get(3));
+                    break;
+
+                case "define_role":
+                    this.authenticationService.defineRole(list.get(1), list.get(2), list.get(3));
+                    break;
+                    
             }
         } catch (CommandProcessorException e) {
             System.out.println(e.getMessage());
