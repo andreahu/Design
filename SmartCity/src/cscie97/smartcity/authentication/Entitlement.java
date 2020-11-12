@@ -1,5 +1,10 @@
 package cscie97.smartcity.authentication;
 
+/**
+ * This class is the parent class that implements interface Element.
+ * This class has two child classes: Role and Permission
+ */
+
 public abstract class Entitlement implements Element {
 
     private String id;

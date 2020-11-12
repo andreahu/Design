@@ -15,13 +15,13 @@ define_role child_role "Child Role" "Has all permissions of a child"
 define_role public_admin_role "Public Administrator Role" "Has all permissions of a public administrator"
 define_role admin_role "Admin Role" "Has all permissions of an administrator"
 
-## add permission (permission, role ) to role
-## add_permission_to_role <role_id> <permission_id>
-#add_permission_to_role admin_role auth_user_admin
-#add_permission_to_role admin_role scms_control_robot
-#add_permission_to_role admin_role scms_drive_car
-#add_permission_to_role admin_role scms_define_city
-#
+# add permission (permission, role ) to role
+# add_permission_to_role <role_id> <permission_id>
+add_permission_to_role admin_role auth_user_admin
+add_permission_to_role admin_role scms_control_robot
+add_permission_to_role admin_role scms_drive_car
+add_permission_to_role admin_role scms_define_city
+
 #add_permission_to_role public_admin_role scms_control_robot
 #add_permission_to_role public_admin_role scms_drive_car
 #

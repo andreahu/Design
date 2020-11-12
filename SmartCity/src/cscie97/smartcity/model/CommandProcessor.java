@@ -218,7 +218,11 @@ public class CommandProcessor {
                 case "define_role":
                     this.authenticationService.defineRole(list.get(1), list.get(2), list.get(3));
                     break;
-                    
+
+                case "add_permission_to_role":
+                    this.authenticationService.addPermissionToRole(list.get(1), list.get(2));
+                    break;
+
             }
         } catch (CommandProcessorException e) {
             System.out.println(e.getMessage());
