@@ -7,10 +7,12 @@ public class AuthenticationService {
 
     private Map<String, Permission> permissionMap;
     private Map<String, Role> roleMap;
+    private Map<String, User> userMap;
 
     public AuthenticationService() {
         this.permissionMap = new HashMap<>();
         this.roleMap = new HashMap<>();
+        this.userMap = new HashMap<>();
     }
 
     public void definePermission(String id, String name, String description) {
@@ -35,13 +37,25 @@ public class AuthenticationService {
 
     public void createUser(String user_id, String user_name) {
         User u = new User(user_id, user_name);
+        this.userMap.put(user_id, u);
         System.out.println("User has been created");
     }
 
+    public void addUserCredential(String user_id, String credentialType, String value) {
+        User u = userMap.get(user_id);
+        if (credentialType.equals("password")) {
+            u.getCredentials().put("password", value);
+        } else if (credentialType.equals("biometric")) {
+            String[] typeValuePair = value.split(":");
+            String type = typeValuePair[0];
+            String typeValue = typeValuePair[1];
+            u.getCredentials().put(type, typeValue);
+        }
+        System.out.println("Credential has been added");
+    }
+    
 
     //getters and setters
-
-
     public Map<String, Permission> getPermissionMap() {
         return permissionMap;
     }

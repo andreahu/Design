@@ -227,6 +227,10 @@ public class CommandProcessor {
                     this.authenticationService.createUser(list.get(1), list.get(2));
                     break;
 
+                case "add_user_credential":
+                    this.authenticationService.addUserCredential(list.get(1), list.get(2), list.get(3));
+                    break;
+
             }
         } catch (CommandProcessorException e) {
             System.out.println(e.getMessage());
