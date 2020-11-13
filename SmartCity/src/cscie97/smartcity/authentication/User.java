@@ -15,6 +15,7 @@ public class User implements Element {
 
     private String id;
     private String name;
+    private String role_id;
 
     private Map<String, String> credentials;
     private List<Entitlement> entitlements;
@@ -64,4 +65,13 @@ public class User implements Element {
     public void setEntitlements(List<Entitlement> entitlements) {
         this.entitlements = entitlements;
     }
+
+    public String getRole_id() {
+        return role_id;
+    }
+
+    public void setRole_id(String role_id) {
+        this.role_id = role_id;
+    }
 }
+

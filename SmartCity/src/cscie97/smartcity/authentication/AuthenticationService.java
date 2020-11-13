@@ -53,7 +53,20 @@ public class AuthenticationService {
         }
         System.out.println("Credential has been added");
     }
-    
+
+    public void addRoleToUser(String user_id, String role_id) {
+        User u = userMap.get(user_id);
+        u.setRole_id(role_id);
+        System.out.println("Role has been added to user");
+    }
+
+
+    //# add_role_to_user <user_id> <role>
+    //add_role_to_user resident_1 adult_role
+    //add_role_to_user resident_2 child_role
+    //add_role_to_user visitor_1 adult_role
+    //add_role_to_user admin_1 admin_role
+
 
     //getters and setters
     public Map<String, Permission> getPermissionMap() {
