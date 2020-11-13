@@ -26,15 +26,16 @@ public class AuthenticationService {
     }
 
 
-    //# add permission (permission, role ) to role
-    //# add_permission_to_role <role_id> <permission_id>
-    //add_permission_to_role admin_role auth_user_admin
-
     public void addPermissionToRole(String role_id, String permission_id) {
         Role r = roleMap.get(role_id);
         Permission p = permissionMap.get(permission_id);
         r.getPermissions().add(p);
         System.out.println("Permission has been added to role.");
+    }
+
+    public void createUser(String user_id, String user_name) {
+        User u = new User(user_id, user_name);
+        System.out.println("User has been created");
     }
 
 

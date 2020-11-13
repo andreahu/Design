@@ -223,6 +223,10 @@ public class CommandProcessor {
                     this.authenticationService.addPermissionToRole(list.get(1), list.get(2));
                     break;
 
+                case "create_user":
+                    this.authenticationService.createUser(list.get(1), list.get(2));
+                    break;
+
             }
         } catch (CommandProcessorException e) {
             System.out.println(e.getMessage());
