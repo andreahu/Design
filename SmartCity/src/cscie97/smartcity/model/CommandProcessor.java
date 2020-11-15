@@ -235,6 +235,10 @@ public class CommandProcessor {
                     this.authenticationService.addRoleToUser(list.get(1), list.get(2));
                     break;
 
+                case "create_resource_role":
+                    this.authenticationService.createResourceRole(list.get(1), list.get(2), list.get(3));
+                    break;
+
             }
         } catch (CommandProcessorException e) {
             System.out.println(e.getMessage());

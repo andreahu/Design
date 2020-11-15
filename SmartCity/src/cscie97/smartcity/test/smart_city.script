@@ -54,13 +54,11 @@ add_role_to_user resident_2 child_role
 add_role_to_user visitor_1 adult_role
 add_role_to_user admin_1 admin_role
 
-#
-## create resource role
-## create_resource_role <resource_role_name> <role> <resource>
-#create_resource_role city1_public_administrator_resource_role public_admin_role city1
-#create_resource_role city2_public_administrator_resource_role public_admin_role city2
+# create resource role
+# create_resource_role <resource_role_name> <role> <resource>
+create_resource_role city1_public_administrator_resource_role public_admin_role city1
+create_resource_role city2_public_administrator_resource_role public_admin_role city2
 
-#
-## add resource role to user
-#add_role_to_user resident_1 city1_public_administrator_resource_role
-#add_role_to_user resident_1 city2_public_administrator_resource_role
+# add resource role to user
+add_role_to_user resident_1 city1_public_administrator_resource_role
+add_role_to_user resident_1 city2_public_administrator_resource_role

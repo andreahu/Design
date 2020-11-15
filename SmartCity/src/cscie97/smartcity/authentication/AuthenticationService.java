@@ -8,11 +8,13 @@ public class AuthenticationService {
     private Map<String, Permission> permissionMap;
     private Map<String, Role> roleMap;
     private Map<String, User> userMap;
+    private Map<String, Resource> resourceMap;
 
     public AuthenticationService() {
         this.permissionMap = new HashMap<>();
         this.roleMap = new HashMap<>();
         this.userMap = new HashMap<>();
+        this.resourceMap = new HashMap<>();
     }
 
     public void definePermission(String id, String name, String description) {
@@ -60,12 +62,16 @@ public class AuthenticationService {
         System.out.println("Role has been added to user");
     }
 
+    public void createResourceRole(String resource_role_id, String role_id, String resource_id) {
+        if (!resourceMap.containsKey(resource_id)) {
+            Resource resource = new Resource(resource_id);
+            resourceMap.put(resource_id, resource);
+            System.out.println("New Resource created");
+        }
 
-    //# add_role_to_user <user_id> <role>
-    //add_role_to_user resident_1 adult_role
-    //add_role_to_user resident_2 child_role
-    //add_role_to_user visitor_1 adult_role
-    //add_role_to_user admin_1 admin_role
+        ResourceRole rr = new ResourceRole(resource_role_id, role_id, resource_id);
+        System.out.println("ResourceRole has been added to user");
+    }
 
 
     //getters and setters
@@ -83,5 +89,21 @@ public class AuthenticationService {
 
     public void setRoleMap(Map<String, Role> roleMap) {
         this.roleMap = roleMap;
+    }
+
+    public Map<String, User> getUserMap() {
+        return userMap;
+    }
+
+    public void setUserMap(Map<String, User> userMap) {
+        this.userMap = userMap;
+    }
+
+    public Map<String, Resource> getResourceMap() {
+        return resourceMap;
+    }
+
+    public void setResourceMap(Map<String, Resource> resourceMap) {
+        this.resourceMap = resourceMap;
     }
 }

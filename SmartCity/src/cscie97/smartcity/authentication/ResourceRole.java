@@ -2,14 +2,14 @@ package cscie97.smartcity.authentication;
 
 public class ResourceRole extends Role {
 
-    //TODO: from the script the constructor should be different
-
-    //# create resource role
-    //# create_resource_role <resource_role_name> <role_id> <resource>
-    //create_resource_role city1_public_administrator_resource_role admin_role city1
+    private String resource_id;
+    private String role_id;
 
 
-    public ResourceRole(String id, String name, String description) {
-        super(id, name, description);
+    public ResourceRole(String id, String role_id, String resource_id) {
+        super(id, id, "This is a ResourceRole");//the id and name is the same for resource role
+        this.resource_id = role_id;
+        this.resource_id = resource_id;
     }
+
 }
