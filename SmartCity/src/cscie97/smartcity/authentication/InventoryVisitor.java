@@ -12,7 +12,7 @@ public class InventoryVisitor implements VisitorINF {
             System.out.println("Credential - " + type + ": " + u.getCredentials().get(type));
         }
 
-        for (String role : u.getEntitlements()) {
+        for (String role : u.getRoles()) {
             System.out.println("role: " + role);
         }
 

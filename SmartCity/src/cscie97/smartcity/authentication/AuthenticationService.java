@@ -10,11 +10,14 @@ public class AuthenticationService {
     private Map<String, User> userMap;
     private Map<String, Resource> resourceMap;
 
+    private Map<String, AuthToken> tokenMap;
+
     public AuthenticationService() {
         this.permissionMap = new HashMap<>();
         this.roleMap = new HashMap<>();
         this.userMap = new HashMap<>();
         this.resourceMap = new HashMap<>();
+        this.tokenMap = new HashMap<>();
     }
 
     public void definePermission(String id, String name, String description) {
@@ -59,7 +62,7 @@ public class AuthenticationService {
     public void addRoleToUser(String user_id, String role_id) {
         User u = userMap.get(user_id);
         u.setRole_id(role_id);
-        u.getEntitlements().add(role_id);
+        u.getRoles().add(role_id);
         System.out.println("Role has been added to user");
     }
 
@@ -72,6 +75,57 @@ public class AuthenticationService {
 
         ResourceRole rr = new ResourceRole(resource_role_id, role_id, resource_id);
         System.out.println("ResourceRole has been added to user");
+    }
+
+    public String loginWithPassword(String userId, String password) {
+        User u = this.userMap.get(userId);
+        if (u.getCredentials().get("password").equals(password)) {
+            AuthToken authToken = new AuthToken(userId);
+            String token = authToken.getToken();
+            this.tokenMap.put(token, authToken);
+            return token;
+        }
+        return null;
+    }
+
+    public String loginWithVoice(String userId, String voicePrint) {
+        User u = this.userMap.get(userId);
+        if (u.getCredentials().get("voiceprint").equals(voicePrint)) {
+            AuthToken authToken = new AuthToken(userId);
+            String token = authToken.getToken();
+            this.tokenMap.put(token, authToken);
+            return token;
+        }
+        return null;
+    }
+
+    public String loginWithFace(String userId, String facePrint) {
+        User u = this.userMap.get(userId);
+        if (u.getCredentials().get("faceprint").equals(facePrint)) {
+            AuthToken authToken = new AuthToken(userId);
+            String token = authToken.getToken();
+            this.tokenMap.put(token, authToken);
+            return token;
+        }
+        return null;
+    }
+
+    public void checkPermission(String token, String permissionId) throws AccessDeniedException {
+        AuthToken authToken = this.tokenMap.get(token);
+        User user = this.userMap.get(authToken.getUserId());
+        CheckAccessVisitor checkAccessVisitor = new CheckAccessVisitor(permissionId);
+        for (String roleId : user.getRoles()) {
+            Role role = this.roleMap.get(roleId);
+            role.accept(checkAccessVisitor);
+        }
+        for (String pId : user.getPermissions()) {
+            Permission permission = this.permissionMap.get(pId);
+            permission.accept(checkAccessVisitor);
+        }
+
+        if (!checkAccessVisitor.isHasAccess()) {
+            throw new AccessDeniedException(user.getId(), permissionId);
+        }
     }
 
 

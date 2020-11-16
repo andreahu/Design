@@ -19,13 +19,16 @@ public class User implements Element {
     private String role_id;
 
     private Map<String, String> credentials;
-    private List<String> entitlements;
+
+    private List<String> roles;//List of String: role_id
+    private List<String> permissions;//List of String: permission_id
 
     public User(String id, String name) {
         this.id = id;
         this.name = name;
         this.credentials = new HashMap<>();
-        this.entitlements = new ArrayList<>();
+        this.roles = new ArrayList<>();
+        this.permissions = new ArrayList<>();
     }
 
     @Override
@@ -60,12 +63,12 @@ public class User implements Element {
         this.credentials = credentials;
     }
 
-    public List<String> getEntitlements() {
-        return entitlements;
+    public List<String> getRoles() {
+        return roles;
     }
 
-    public void setEntitlements(List<String> entitlements) {
-        this.entitlements = entitlements;
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 
     public String getRole_id() {
@@ -74,6 +77,14 @@ public class User implements Element {
 
     public void setRole_id(String role_id) {
         this.role_id = role_id;
+    }
+
+    public List<String> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<String> permissions) {
+        this.permissions = permissions;
     }
 }
 

@@ -5,7 +5,9 @@ import java.util.List;
 
 public class Role extends Entitlement {
 
-    private List<Permission> permissions;
+    private ArrayList<Permission> permissions;
+
+    // TODO: Should we add sub roles here?
 
     public Role(String id, String name, String description) {
         super(id, name, description);
@@ -19,11 +21,11 @@ public class Role extends Entitlement {
 
     //getters and setters
 
-    public List<Permission> getPermissions() {
+    public ArrayList<Permission> getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(List<Permission> permissions) {
+    public void setPermissions(ArrayList<Permission> permissions) {
         this.permissions = permissions;
     }
 }
