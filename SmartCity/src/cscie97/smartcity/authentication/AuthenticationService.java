@@ -9,7 +9,6 @@ public class AuthenticationService {
     private Map<String, Role> roleMap;
     private Map<String, User> userMap;
     private Map<String, Resource> resourceMap;
-
     private Map<String, AuthToken> tokenMap;
 
     public AuthenticationService() {
@@ -110,7 +109,7 @@ public class AuthenticationService {
         return null;
     }
 
-    public void checkPermission(String token, String permissionId) throws AccessDeniedException {
+    public void checkAccess(String token, String permissionId) throws AccessDeniedException {
         AuthToken authToken = this.tokenMap.get(token);
         User user = this.userMap.get(authToken.getUserId());
         CheckAccessVisitor checkAccessVisitor = new CheckAccessVisitor(permissionId);
