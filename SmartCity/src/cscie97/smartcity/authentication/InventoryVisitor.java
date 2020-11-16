@@ -40,6 +40,11 @@ public class InventoryVisitor implements VisitorINF {
 
     @Override
     public void visitResourceRole(ResourceRole rr) {
-
+        String id = rr.getId();
+        String name = rr.getName();
+        String description = rr.getDescription();
+        String resource_id = rr.getResource_id();
+        String role_id = rr.getRole_id();
+        System.out.println("Role's id: " + id + "; name: " + name + "; description: " + description + "; resource id: " + resource_id + "role id: " + role_id);
     }
 }
