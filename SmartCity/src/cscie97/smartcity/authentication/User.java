@@ -19,7 +19,7 @@ public class User implements Element {
     private String role_id;
 
     private Map<String, String> credentials;
-    private List<Entitlement> entitlements;
+    private List<String> entitlements;
 
     public User(String id, String name) {
         this.id = id;
@@ -60,11 +60,11 @@ public class User implements Element {
         this.credentials = credentials;
     }
 
-    public List<Entitlement> getEntitlements() {
+    public List<String> getEntitlements() {
         return entitlements;
     }
 
-    public void setEntitlements(List<Entitlement> entitlements) {
+    public void setEntitlements(List<String> entitlements) {
         this.entitlements = entitlements;
     }
 

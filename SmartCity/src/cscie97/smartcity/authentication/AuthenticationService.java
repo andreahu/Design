@@ -59,6 +59,7 @@ public class AuthenticationService {
     public void addRoleToUser(String user_id, String role_id) {
         User u = userMap.get(user_id);
         u.setRole_id(role_id);
+        u.getEntitlements().add(role_id);
         System.out.println("Role has been added to user");
     }
 
