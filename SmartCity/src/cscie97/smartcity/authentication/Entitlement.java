@@ -17,14 +17,8 @@ public abstract class Entitlement implements Element {
         this.description = description;
     }
 
-    @Override
-    public void accept(VisitorINF v) {
-
-        //TODO
-
-    }
-
-
+    public abstract void accept(VisitorINF v);
+    
     //getters and setter
 
     public String getId() {

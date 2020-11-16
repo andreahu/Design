@@ -12,6 +12,10 @@ public class Role extends Entitlement {
         this.permissions = new ArrayList<>();
     }
 
+    public void accept(VisitorINF v) {
+        v.visitRole(this);
+    }
+
 
     //getters and setters
 

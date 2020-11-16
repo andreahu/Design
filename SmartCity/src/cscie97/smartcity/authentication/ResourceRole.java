@@ -12,4 +12,8 @@ public class ResourceRole extends Role {
         this.resource_id = resource_id;
     }
 
+    public void accept(VisitorINF v) {
+        v.visitResourceRole(this);
+    }
+    
 }

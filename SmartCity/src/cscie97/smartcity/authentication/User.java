@@ -1,5 +1,6 @@
 package cscie97.smartcity.authentication;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,11 +25,12 @@ public class User implements Element {
         this.id = id;
         this.name = name;
         this.credentials = new HashMap<>();
+        this.entitlements = new ArrayList<>();
     }
 
     @Override
     public void accept(VisitorINF v) {
-        //TODO
+        v.visitUser(this);
     }
 
 
