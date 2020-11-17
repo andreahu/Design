@@ -31,6 +31,11 @@ public class User implements Element {
         this.permissions = new ArrayList<>();
     }
 
+    /**
+     * Utilize visitor pattern to execute the corresponding algorithm
+     *
+     * @param v
+     */
     @Override
     public void accept(VisitorINF v) {
         v.visitUser(this);

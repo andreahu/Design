@@ -151,9 +151,9 @@ public class AuthenticationService {
     /**
      * This method get the voiceprint  from the user credential map, and then compare it with the voiceprint passed in. If they match, then create an AuthToken object. Add the token into the Token map and return the token string
      *
-     * @param userId
-     * @param voicePrint
-     * @return
+     * @param userId     user id
+     * @param voicePrint the voiceprint string
+     * @return the token generated
      */
     public String loginWithVoice(String userId, String voicePrint) {
         User u = this.userMap.get(userId);
@@ -166,6 +166,13 @@ public class AuthenticationService {
         return null;
     }
 
+    /**
+     * This method get the faceprint  from the user credential map, and then compare it with the faceprint passed in. If they match, then create an AuthToken object. Add the token into the Token map and return the token string
+     *
+     * @param userId    user id
+     * @param facePrint the faceprint string
+     * @return the token generated
+     */
     public String loginWithFace(String userId, String facePrint) {
         User u = this.userMap.get(userId);
         if (u.getCredentials().get("faceprint").equals(facePrint)) {
@@ -177,6 +184,15 @@ public class AuthenticationService {
         return null;
     }
 
+    /**
+     * This method takes the token to find the AuthToken object, then find the user from the AuthToken object
+     * After that, use the visitor pattern to check if the user has the permission required
+     * If the user doesn't have the permission required, a AccessDeiedException will be thrown
+     *
+     * @param token        token string
+     * @param permissionId the permission required
+     * @throws AccessDeniedException
+     */
     public void checkAccess(String token, String permissionId) throws AccessDeniedException {
         AuthToken authToken = this.tokenMap.get(token);
         User user = this.userMap.get(authToken.getUserId());
