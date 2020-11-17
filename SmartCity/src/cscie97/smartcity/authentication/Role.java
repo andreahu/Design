@@ -3,17 +3,24 @@ package cscie97.smartcity.authentication;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Role class is a child class of Entitlement. Therefore it extends all the properties and methods from Entitlement
+ */
 public class Role extends Entitlement {
 
     private ArrayList<Permission> permissions;
 
-    // TODO: Should we add sub roles here?
 
     public Role(String id, String name, String description) {
         super(id, name, description);
         this.permissions = new ArrayList<>();
     }
 
+    /**
+     * Utilize visitor pattern to execute the corresponding algorithm
+     *
+     * @param v the visitor object
+     */
     public void accept(VisitorINF v) {
         v.visitRole(this);
     }

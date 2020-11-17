@@ -6,6 +6,11 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.Random;
 
+/**
+ * AuthToken is used in this package to authenticate the user.
+ * Controller Service will request an authentication token from the Authentication Service. Then use the authentication token to access the Model Service API.
+ */
+
 public class AuthToken {
     private String token;
     private boolean isActive;
@@ -26,10 +31,16 @@ public class AuthToken {
         this.expirationTime = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 
+    /**
+     * @return the token
+     */
     public String getToken() {
         return token;
     }
 
+    /**
+     * @return the isActive variable
+     */
     public boolean isActive() {
         return isActive;
     }

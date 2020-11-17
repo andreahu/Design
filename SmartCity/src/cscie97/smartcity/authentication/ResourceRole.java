@@ -1,5 +1,8 @@
 package cscie97.smartcity.authentication;
 
+/**
+ * ResourceRole class is a child class of Entitlement. Therefore it extends all the properties and methods from Roles
+ */
 public class ResourceRole extends Role {
 
     private String resource_id;
@@ -17,8 +20,7 @@ public class ResourceRole extends Role {
     }
 
     //getters and setter
-
-
+    
     public String getResource_id() {
         return resource_id;
     }

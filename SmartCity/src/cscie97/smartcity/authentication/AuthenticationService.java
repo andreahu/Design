@@ -9,18 +9,27 @@ import java.util.Map;
  */
 public class AuthenticationService {
 
+    private static AuthenticationService instance = null;
+
     private Map<String, Permission> permissionMap;
     private Map<String, Role> roleMap;
     private Map<String, User> userMap;
     private Map<String, Resource> resourceMap;
     private Map<String, AuthToken> tokenMap;
 
-    public AuthenticationService() {
+    private AuthenticationService() {
         this.permissionMap = new HashMap<>();
         this.roleMap = new HashMap<>();
         this.userMap = new HashMap<>();
         this.resourceMap = new HashMap<>();
         this.tokenMap = new HashMap<>();
+    }
+
+    public static AuthenticationService getInstance() {
+        if (instance == null) {
+            instance = new AuthenticationService();
+        }
+        return instance;
     }
 
     /**

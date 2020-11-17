@@ -1,6 +1,8 @@
 package cscie97.smartcity.model;
 
 import com.cscie97.ledger.Ledger;
+import cscie97.smartcity.authentication.AccessDeniedException;
+import cscie97.smartcity.authentication.AuthenticationService;
 import cscie97.smartcity.controller.Observer;
 import cscie97.smartcity.controller.Subject;
 
@@ -17,6 +19,7 @@ public class ModelService implements Subject {
     private Map<String, Person> masterPersonMap;
     public static float FLOAT_EMPTY = Float.MAX_VALUE;
     private Ledger ledger;
+    private AuthenticationService authService;
 
     public ModelService(Map<String, City> cityMap, Map<String, Person> masterPersonMap, Ledger l) {
         this.cityMap = cityMap;
@@ -24,6 +27,7 @@ public class ModelService implements Subject {
         observers = new ArrayList<>();
         events = new ArrayList<>();
         this.ledger = l;
+        this.authService = AuthenticationService.getInstance();
     }
 
     public void addEvent(Event e) {
@@ -272,7 +276,14 @@ public class ModelService implements Subject {
      * @param activity
      * @return robot
      */
-    public Robot defineRobot(String cityId, String deviceId, float lat, float lon, String enabled, String activity) {
+    public Robot defineRobot(String cityId, String deviceId, float lat, float lon, String enabled, String activity, String token) {
+        try {
+            this.authService.checkAccess(token, "scms_control_robot");
+        } catch (AccessDeniedException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
         City theCity = cityMap.get(cityId);
         Robot robot = new Robot(theCity, deviceId, lat, lon, enabled, activity);
         theCity.getDeviceMap().put(deviceId, robot);
@@ -280,7 +291,13 @@ public class ModelService implements Subject {
         return robot;
     }
 
-    public void updateRobot(String cityId, String deviceId, float lat, float lon, String activity) {
+    public void updateRobot(String cityId, String deviceId, float lat, float lon, String activity, String token) {
+        try {
+            this.authService.checkAccess(token, "scms_control_robot");
+        } catch (AccessDeniedException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
         Device robot = cityMap.get(cityId).getDeviceMap().get(deviceId);
         if (lat != FLOAT_EMPTY) robot.setLat(lat);
         if (lon != FLOAT_EMPTY) robot.setLon(lon);

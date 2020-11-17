@@ -17,8 +17,13 @@ public abstract class Entitlement implements Element {
         this.description = description;
     }
 
+    /**
+     * Utilize visitor pattern to execute the corresponding algorithm
+     *
+     * @param v the visitor object
+     */
     public abstract void accept(VisitorINF v);
-    
+
     //getters and setter
 
     public String getId() {

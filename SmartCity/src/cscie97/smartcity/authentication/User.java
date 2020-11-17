@@ -34,7 +34,7 @@ public class User implements Element {
     /**
      * Utilize visitor pattern to execute the corresponding algorithm
      *
-     * @param v
+     * @param v the visitor object
      */
     @Override
     public void accept(VisitorINF v) {

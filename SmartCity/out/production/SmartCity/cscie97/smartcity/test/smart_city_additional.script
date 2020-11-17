@@ -1,0 +1,55 @@
+# define permissions
+# define_permission <permission_id> <permission_name> <permission_description>
+define_permission scms_control_robot "Control Robot" "Full Control of Robots"
+
+# define roles
+# define_role <role_id> <role_name> <role_description>
+define_role adult_role "Adult Role" "Has all permissions of an adult"
+define_role child_role "Child Role" "Has all permissions of a child"
+define_role public_admin_role "Public Administrator Role" "Has all permissions of a public administrator"
+define_role admin_role "Admin Role" "Has all permissions of an administrator"
+
+# add permission (permission, role ) to role
+# add_permission_to_role <role_id> <permission_id>
+add_permission_to_role admin_role scms_control_robot
+add_permission_to_role public_admin_role scms_control_robot
+add_permission_to_role adult_role scms_control_robot
+add_permission_to_role child_role scms_control_robot
+
+# create_user
+# create_user <user_id> <user_name>
+create_user resident_1 "resident adult Nathan"
+create_user resident_2 "resident child Aria"
+create_user visitor_1 "Kate"
+create_user admin_1 "Luna"
+
+# add_user_credential
+# add_user_credential <user_id> <biometric|password> <value>
+add_user_credential resident_1 biometric voiceprint:jane-voiceprint
+add_user_credential resident_2 biometric voiceprint:billy-voiceprint
+add_user_credential resident_2 biometric faceprint:billy-faceprint
+add_user_credential visitor_1 biometric faceprint:adam-faceprint
+add_user_credential admin_1 password secret
+
+# add role to user
+# add_role_to_user <user_id> <role>
+add_role_to_user resident_1 adult_role
+add_role_to_user resident_2 child_role
+add_role_to_user visitor_1 adult_role
+add_role_to_user admin_1 admin_role
+
+#log in
+login_with_password admin_1 secret
+
+# City Commands
+# Define a city
+# define city <city_id> name <name> account <address> lat <float> long <float> radius <float>
+define city city_1 name Cambridge-MA account cambridge-account lat 42.3766 long -71.1160 radius 100
+
+# Define a robot
+#define robot <city_id>:<device_id> lat <float> long <float> enabled (true|false) activity <string>
+define robot city_1:bot_1 lat 42.3735 long -71.1205 enabled true activity "cleaning"
+
+#Update a robot
+#update robot <city_id>:<device_id> [lat <float> long <float>] [enabled (true|false)] [activity <string>]
+update robot city_1:bot_1 lat 42.3732 long -71.1195

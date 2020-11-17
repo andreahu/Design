@@ -17,12 +17,13 @@ public class CommandProcessor {
     ControllerService controller;
     AuthenticationService authenticationService;
     private Ledger ledger;
+    private String currentToken;
 
     public CommandProcessor() {
         this.ledger = new Ledger("ControllerLedger", "the ledger used for controllerService", "AH");
         this.modelService = new ModelService(new HashMap<String, City>(), new HashMap<String, Person>(), this.ledger);
         this.controller = new ControllerService(modelService, this.ledger);
-        this.authenticationService = new AuthenticationService();
+        this.authenticationService = AuthenticationService.getInstance();
     }
 
     private List<String> stripQuotes(List<String> in) {
@@ -154,11 +155,11 @@ public class CommandProcessor {
                     break;
 
                 case "define robot":
-                    this.modelService.defineRobot(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10));
+                    this.modelService.defineRobot(city_id, device_id, Float.parseFloat(list.get(4)), Float.parseFloat(list.get(6)), list.get(8), list.get(10), this.currentToken);
                     break;
 
                 case "update robot":
-                    this.modelService.updateRobot(city_id, device_id, lat, lon, activity);
+                    this.modelService.updateRobot(city_id, device_id, lat, lon, activity, this.currentToken);
                     break;
 
                 case "define vehicle":
@@ -239,6 +240,8 @@ public class CommandProcessor {
                     this.authenticationService.createResourceRole(list.get(1), list.get(2), list.get(3));
                     break;
 
+                case "login_with_password":
+                    this.currentToken = this.authenticationService.loginWithPassword(list.get(1), list.get(2));
             }
         } catch (CommandProcessorException e) {
             System.out.println(e.getMessage());
