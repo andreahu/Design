@@ -60,7 +60,6 @@ public class CheckAccessVisitor implements VisitorINF {
      */
     @Override
     public void visitResourceRole(ResourceRole r) {
-        //TODO: add checking resource
         for (Permission p : r.getPermissions()) {
             if (p.getId().equals(this.permissionId)) {
                 hasAccess = true;
